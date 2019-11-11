@@ -36,8 +36,6 @@ public class BoardPage {
     @FindBy(how = How.CSS, using = ".js-cancel")
     private WebElement btnCancelAddCard;
 
-
-
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
         btnAddList.click();
@@ -55,5 +53,4 @@ public class BoardPage {
         String node = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
         return webDriver.findElement(By.xpath(node)).getText();
     }
-
 }
