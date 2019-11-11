@@ -1,6 +1,5 @@
 package org.fundacionjala.pivotal;
 
-
 import org.fundacionjala.trello.ui.pages.BoardPage;
 import org.fundacionjala.trello.ui.pages.DashboardPage;
 import org.fundacionjala.trello.ui.pages.LoginPage;

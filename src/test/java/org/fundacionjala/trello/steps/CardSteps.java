@@ -43,6 +43,6 @@ public class CardSteps {
 
     @And("a board created with the name {string}")
     public void aBoardCreatedWithTheName(String boardName) {
-        boardPage = dashboardPage.createBoard("my board");
+        boardPage = dashboardPage.createBoard(boardName);
     }
 }
