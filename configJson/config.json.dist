@@ -1,0 +1,15 @@
+{
+  "credentials": {
+      "owner": {
+        "username": "",
+        "password": ""
+      },
+      "member": {
+        "username": "",
+        "password": ""
+      }
+    },
+    "url": {
+      "trello": ""
+    }
+}
