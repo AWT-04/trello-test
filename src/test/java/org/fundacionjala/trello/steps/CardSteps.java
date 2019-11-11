@@ -24,7 +24,6 @@ public class CardSteps {
 
     @Then("I should see {string} in the list of cards")
     public void iShouldSeeInTheListOfCards(String cardName) {
-        String XPath = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
         Assert.assertEquals(boardPage.extractTextToTheCard(cardName), cardName);
     }
 
