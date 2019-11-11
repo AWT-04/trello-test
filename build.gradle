@@ -1,18 +1,40 @@
-plugins {
-    id 'java'
-}
-
-group 'trello-tests'
-version '1.0-SNAPSHOT'
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'checkstyle'
 
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
+// In this section you declare the dependencies for your production and test code
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'org.testng', name: 'testng', version: '7.0.0'
-
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '4.1.2'
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '4.8.0'
+    compile group: 'io.cucumber', name: 'cucumber-testng', version: '4.8.0'
+    compile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '4.8.0'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.1.0'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.7.1'
 }
+
+// Checkstyle configuration
+checkstyle {
+    toolVersion = '8.23'
+}
+
+task runFeatures(type: Test) {
+    useTestNG()
+    options {
+        jvmArgs = ['-Dcucumber.options= --glue org.fundacionjala ' +
+                           '--plugin pretty ']
+    }
+    testLogging.showStandardStreams = true
+    scanForTestClasses = false
+    ignoreFailures = false
+    reports.html.enabled = false
+}
+

@@ -11,6 +11,7 @@ import java.util.List;
 
 public class BoardPage {
     private WebDriver webDriver;
+    private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
 
     public BoardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -61,21 +62,20 @@ public class BoardPage {
     }
 
     public String extractTextToTheCard(final String cardName) {
-        String node = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
+        String node = String.format(xpathCard, cardName);
         return webDriver.findElement(By.xpath(node)).getText();
     }
 
     public void deleteCard(final String cardName) {
-        String node = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
+        String node = String.format(xpathCard, cardName);
          webDriver.findElement(By.xpath(node)).click();
          btnArchiveCard.click();
          btnDeleteCard.click();
          btnConfirmDeleteCard.click();
     }
 
-    public List<WebElement> listOfCards(final String cardName){
-        String node = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
-        List<WebElement> elements = webDriver.findElements(By.xpath(node));
-        return elements;
+    public List<WebElement> listOfCards(final String cardName) {
+        String node = String.format(xpathCard, cardName);
+        return webDriver.findElements(By.xpath(node));
     }
 }

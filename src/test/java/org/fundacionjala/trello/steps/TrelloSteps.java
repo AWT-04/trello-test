@@ -14,7 +14,6 @@ import java.util.Map;
 public class TrelloSteps {
     private DashboardPage dashboardPage;
     private BoardPage boardPage;
-    private static final int IMPLICIT_TIME = 15;
 
     @Given("I login as user:")
     public void iLoginAsUser(final Map<String, String> user) {
@@ -35,7 +34,7 @@ public class TrelloSteps {
     @And("I create the following cards:")
     public void iCreateTheFollowingCards(final DataTable cards) {
         for (int i = 0; i < cards.height(); i++) {
-            boardPage.createCard(cards.cell(i, 1).toString());
+            boardPage.createCard(cards.cell(i, 1));
         }
     }
 
@@ -45,13 +44,12 @@ public class TrelloSteps {
     }
 
     @When("I delete {string} card")
-    public void iDeleteCard(String cardName) {
+    public void iDeleteCard(final String cardName) {
         boardPage.deleteCard(cardName);
     }
 
     @Then("I should NOT see {string} in the list of cards")
-    public void iShouldNOTSeeInTheListOfCards(String cardName) {
-//        Assert.assertThrows(boardPage.extractTextToTheCard(cardName). );
+    public void iShouldNOTSeeInTheListOfCards(final String cardName) {
         Assert.assertTrue(boardPage.listOfCards(cardName).isEmpty());
     }
 }
