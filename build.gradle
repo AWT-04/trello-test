@@ -25,7 +25,9 @@ dependencies {
 checkstyle {
     toolVersion = '8.23'
 }
-
+test {
+    useTestNG()
+}
 task runFeatures(type: Test) {
     useTestNG()
     options {

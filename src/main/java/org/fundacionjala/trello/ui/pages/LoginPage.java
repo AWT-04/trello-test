@@ -1,27 +1,39 @@
 package org.fundacionjala.trello.ui.pages;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import java.util.concurrent.TimeUnit;
 
 public class LoginPage {
+    private WebDriver webDriver;
+    private static final int IMPLICIT_TIME = 15;
 
-    public LoginPage(final WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    @FindBy(css = "#user")
+    private WebElement userField;
+    @FindBy(css = "#password")
+    private WebElement passwordField;
+    @FindBy(css = "#login")
+    private WebElement loginButton;
+
+    public LoginPage() {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("headless");
+        webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(IMPLICIT_TIME, TimeUnit.SECONDS);
+        webDriver.get("https://trello.com/login");
+        PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(how = How.CSS, using = "#credentials_username")
-    private WebElement txtUserName;
-
-    @FindBy(how = How.CSS, using = ".app_signin_action_button")
-    private WebElement btnActionButton;
-
-    @FindBy(how = How.CSS, using = "#credentials_password")
-    private WebElement txtPassword;
-
-    public void clickLogin() {
-        btnActionButton.submit();
+    public DashboardPage login(final String username, final String password) {
+        userField.sendKeys(username);
+        passwordField.sendKeys(password);
+        loginButton.click();
+        return new DashboardPage(webDriver);
     }
 }
