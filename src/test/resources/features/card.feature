@@ -13,7 +13,6 @@ Feature: Card feature
       | name Card | Python tasks   |
     Then I should see "Selenium tasks" in the list of cards
 
-
   Scenario: Delete a card in boards
     Given I login as user:
       | name     | osalamar@gmail.com |
