@@ -1,14 +1,13 @@
 package org.fundacionjala.trello.pages.common;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.fundacionjala.trello.DashboardPage;
+import org.fundacionjala.trello.ui.pages.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.concurrent.TimeUnit;
 
 public class LoginPage {

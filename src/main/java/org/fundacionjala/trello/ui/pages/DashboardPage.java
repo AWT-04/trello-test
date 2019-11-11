@@ -1,4 +1,4 @@
-package org.fundacionjala.trello;
+package org.fundacionjala.trello.ui.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -64,4 +64,3 @@ public class DashboardPage {
         closeButton.click();
     }
 }
-
