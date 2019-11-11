@@ -4,6 +4,7 @@ Feature: Card feature
     Given I login as user:
       | name     | osalamar@gmail.com |
       | password | r4514812L*         |
+    And a board created with the name "My board"
     When I add a list with the name "To do"
     And I create the following cards:
       | name Card | Selenium tasks |

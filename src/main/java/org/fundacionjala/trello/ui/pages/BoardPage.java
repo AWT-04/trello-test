@@ -1,5 +1,6 @@
 package org.fundacionjala.trello.ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,6 +51,9 @@ public class BoardPage {
         btnCancelAddCard.click();
     }
 
-
+    public String extractTextToTheCard(String cardName){
+        String node = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
+        return webDriver.findElement(By.xpath(node)).getText();
+    }
 
 }
