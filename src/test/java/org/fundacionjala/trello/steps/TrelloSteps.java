@@ -11,7 +11,7 @@ import org.fundacionjala.trello.ui.pages.LoginPage;
 import org.testng.Assert;
 import java.util.Map;
 
-public class CardSteps {
+public class TrelloSteps {
     private DashboardPage dashboardPage;
     private BoardPage boardPage;
     private static final int IMPLICIT_TIME = 15;
@@ -23,13 +23,12 @@ public class CardSteps {
     }
 
     @Then("I should see {string} in the list of cards")
-    public void iShouldSeeInTheListOfCards(String cardName) {
+    public void iShouldSeeInTheListOfCards(final String cardName) {
         Assert.assertEquals(boardPage.extractTextToTheCard(cardName), cardName);
     }
 
     @When("I add a list with the name {string}")
-    public void iAddAListWithTheName(String listName) {
-
+    public void iAddAListWithTheName(final String listName) {
         boardPage.createList(listName);
     }
 
@@ -41,7 +40,7 @@ public class CardSteps {
     }
 
     @And("a board created with the name {string}")
-    public void aBoardCreatedWithTheName(String boardName) {
+    public void aBoardCreatedWithTheName(final String boardName) {
         boardPage = dashboardPage.createBoard(boardName);
     }
 }

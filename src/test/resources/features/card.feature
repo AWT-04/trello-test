@@ -1,4 +1,5 @@
 Feature: Card feature
+  As a owner, I want add, delete and update a card, so that I can verify the UI board
 
   Scenario: Create cards in boards
     Given I login as user:

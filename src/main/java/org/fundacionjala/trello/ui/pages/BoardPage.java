@@ -15,26 +15,26 @@ public class BoardPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(how = How.CSS, using =".list-name-input")
-    public WebElement txtNameList;
+    @FindBy(how = How.CSS, using = ".list-name-input")
+    private WebElement txtNameList;
 
-    @FindBy(how = How.CSS, using =".mod-list-add-button.js-save-edit")
-    public WebElement btnAddList;
+    @FindBy(how = How.CSS, using = ".mod-list-add-button.js-save-edit")
+    private WebElement btnAddList;
 
-    @FindBy(how = How.CSS, using =".open-card-composer.card-templates-enabled.js-open-card-composer")
-    public WebElement btnAddCard;
+    @FindBy(how = How.CSS, using = ".open-card-composer.card-templates-enabled.js-open-card-composer")
+    private WebElement btnAddCard;
 
-    @FindBy(how = How.CSS, using =".js-cancel-edit")
-    public WebElement btnExitCard;
+    @FindBy(how = How.CSS, using = ".js-cancel-edit")
+    private WebElement btnExitCard;
 
-    @FindBy(how = How.CSS, using =".list-card-composer-textarea.js-card-title")
-    public WebElement txtNameCard;
+    @FindBy(how = How.CSS, using = ".list-card-composer-textarea.js-card-title")
+    private WebElement txtNameCard;
 
-    @FindBy(how = How.CSS, using =".js-add-card")
-    public WebElement btnAcceptAddCard;
+    @FindBy(how = How.CSS, using = ".js-add-card")
+    private WebElement btnAcceptAddCard;
 
-    @FindBy(how = How.CSS, using =".js-cancel")
-    public WebElement btnCancelAddCard;
+    @FindBy(how = How.CSS, using = ".js-cancel")
+    private WebElement btnCancelAddCard;
 
 
 
@@ -44,14 +44,14 @@ public class BoardPage {
         btnExitCard.click();
     }
 
-    public void createCard(final String nameCard){
+    public void createCard(final String nameCard) {
         btnAddCard.click();
         txtNameCard.sendKeys(nameCard);
         btnAcceptAddCard.click();
         btnCancelAddCard.click();
     }
 
-    public String extractTextToTheCard(String cardName){
+    public String extractTextToTheCard(final String cardName) {
         String node = String.format("//*[@class='list-card-title js-card-name' and contains(text(),'%s')]", cardName);
         return webDriver.findElement(By.xpath(node)).getText();
     }
