@@ -5,9 +5,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.fundacionjala.trello.pages.common.LoginPage;
 import org.fundacionjala.trello.ui.pages.BoardPage;
 import org.fundacionjala.trello.ui.pages.DashboardPage;
-import org.fundacionjala.trello.ui.pages.LoginPage;
 import org.testng.Assert;
 import java.util.Map;
 
