@@ -43,4 +43,15 @@ public class TrelloSteps {
     public void aBoardCreatedWithTheName(final String boardName) {
         boardPage = dashboardPage.createBoard(boardName);
     }
+
+    @When("I delete {string} card")
+    public void iDeleteCard(String cardName) {
+        boardPage.deleteCard(cardName);
+    }
+
+    @Then("I should NOT see {string} in the list of cards")
+    public void iShouldNOTSeeInTheListOfCards(String cardName) {
+//        Assert.assertThrows(boardPage.extractTextToTheCard(cardName). );
+        Assert.assertTrue(boardPage.listOfCards(cardName).isEmpty());
+    }
 }
