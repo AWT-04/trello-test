@@ -52,4 +52,10 @@ public class TrelloSteps {
     public void iShouldNOTSeeInTheListOfCards(final String cardName) {
         Assert.assertTrue(boardPage.listOfCards(cardName).isEmpty());
     }
+
+    @Given("I log in as {string}")
+    public void iLogInAs(final String account) {
+        LoginPage loginPage = new LoginPage();
+        dashboardPage = loginPage.loginWithAccount(account);
+    }
 }

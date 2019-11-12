@@ -1,6 +1,7 @@
 package org.fundacionjala.trello.pages.common;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.fundacionjala.core.utils.Environment;
 import org.fundacionjala.trello.ui.pages.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,6 +47,15 @@ public class LoginPage {
 
     public DashboardPage login(final String username, final String password) {
         userField.sendKeys(username);
+        passwordField.sendKeys(password);
+        loginButton.click();
+        return new DashboardPage(webDriver);
+    }
+
+    public DashboardPage loginWithAccount(final String account) {
+        String userName = Environment.getInstance().getValue(String.format("credentials.%s.username", account));
+        String password = Environment.getInstance().getValue(String.format("credentials.%s.password", account));
+        userField.sendKeys(userName);
         passwordField.sendKeys(password);
         loginButton.click();
         return new DashboardPage(webDriver);
