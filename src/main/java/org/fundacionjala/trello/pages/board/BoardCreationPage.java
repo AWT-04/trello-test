@@ -4,6 +4,7 @@ import org.fundacionjala.trello.pages.BoardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -17,17 +18,6 @@ public class BoardCreationPage {
     private String backgroundString;
     private static final Map<String, String> BACKGROUNDCOLORS;
 
-
-    @FindBy(css = "._23NUW98LaZfBpQ")
-    private WebElement addBoardTitle;
-
-    public BoardCreationPage(final WebDriver webDriver) {
-        this.webDriver = webDriver;
-    }
-
-    @FindBy(css = "._2MgouXHqRQDP_5")
-    private WebElement createBoardButton;
-
     static {
         Map<String, String> backgroundColors = new HashMap<>();
         backgroundColors.put("blue", "rgb(0, 121, 191)");
@@ -38,6 +28,19 @@ public class BoardCreationPage {
         BACKGROUNDCOLORS = Collections.unmodifiableMap(backgroundColors);
     }
 
+
+    @FindBy(css = "input[data-test-id='create-board-title-input']")
+    private WebElement addBoardTitle;
+
+    public BoardCreationPage(final WebDriver webDriver) {
+        this.webDriver = webDriver;
+        PageFactory.initElements(webDriver, this);
+    }
+
+    @FindBy(css = "button[data-test-id='create-board-submit-button']")
+    private WebElement createBoardButton;
+
+
     public String getTitleString() {
         return titleString;
     }
@@ -47,12 +50,13 @@ public class BoardCreationPage {
     }
 
     public String getBackgroundString() {
-        return BACKGROUNDCOLORS.get(backgroundString == null ? "null" : backgroundString.toLowerCase() );
+        return BACKGROUNDCOLORS.get(backgroundString == null ? "null" : backgroundString.toLowerCase());
     }
-    public BoardPage createNewBoard(final Map<BoardFields,String> inputData){
-        EnumMap<BoardFields, IWebElementProject> enumMap = new EnumMap<>(BoardFields.class);
+
+    public BoardPage createNewBoard(final Map<BoardFields, String> inputData) {
+        EnumMap<BoardFields, ISteps> enumMap = new EnumMap<>(BoardFields.class);
         titleString = inputData.get(BoardFields.TITLE);
-        enumMap.put(BoardFields.TITLE,()-> addBoardTitle.sendKeys(titleString));
+        enumMap.put(BoardFields.TITLE, () -> addBoardTitle.sendKeys(titleString));
         createBoardButton.click();
         return new BoardPage(webDriver);
     }

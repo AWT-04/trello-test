@@ -1,8 +1,7 @@
 package org.fundacionjala.trello.pages;
 
-import org.fundacionjala.trello.pages.BoardPage;
 import org.fundacionjala.trello.pages.board.BoardCreationPage;
-import org.fundacionjala.trello.pages.board.IWebElementProject;
+import org.fundacionjala.trello.pages.board.ISteps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -75,14 +74,14 @@ public class DashboardPage {
         closeButton.click();
     }
 
-    public BoardCreationPage clickAddBoard(final String wayCreateProject){
-        HashMap<String, IWebElementProject> waysToCreateBoard = new HashMap<>();
-        waysToCreateBoard.put(WAY_BOARDS_PAGE,this::createBoardByBoardButton);
-        waysToCreateBoard.get(wayCreateProject).test();
+    public BoardCreationPage clickAddBoard(final String wayCreateProject) {
+        HashMap<String, ISteps> waysToCreateBoard = new HashMap<>();
+        waysToCreateBoard.put(WAY_BOARDS_PAGE, this::createBoardByBoardButton);
+        waysToCreateBoard.get(wayCreateProject).execute();
         return new BoardCreationPage(webDriver);
     }
 
-    public void createBoardByBoardButton(){
+    public void createBoardByBoardButton() {
         createBoardButton.click();
     }
 }
