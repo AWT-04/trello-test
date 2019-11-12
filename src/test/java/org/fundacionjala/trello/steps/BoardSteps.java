@@ -13,7 +13,6 @@ import java.util.Map;
 
 public class BoardSteps {
     private DashboardPage dashboardPage;
-    private BoardPage boardPage;
     private BoardCreationPage boardCreationPage;
 
     public BoardSteps(final CommonSteps commonSteps) {
@@ -23,7 +22,7 @@ public class BoardSteps {
     @When("I create new board from {string} with a:")
     public void iCreateABoardWithA(final String wayToCreateBoard, final Map<BoardFields, String> dataTable) {
         boardCreationPage = dashboardPage.clickAddBoard(wayToCreateBoard);
-        boardPage = boardCreationPage.createNewBoard(dataTable);
+        BoardPage boardPage = boardCreationPage.createNewBoard(dataTable);
     }
 
     @Then("^I should see the board$")
