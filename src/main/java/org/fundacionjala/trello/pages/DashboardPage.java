@@ -34,6 +34,11 @@ public class DashboardPage {
     @FindBy(css = ".js-delete")
     private WebElement deleteBoard;
 
+    @FindBy(css = ".board-tile.mod-add")
+    private WebElement createBoardButton;
+
+    @FindBy(css = ".subtle-input")
+    private WebElement createBoardButtonAddBoardTitle;
 
     public DashboardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -62,5 +67,11 @@ public class DashboardPage {
         closeButton.click();
         deleteBoard.click();
         closeButton.click();
+    }
+
+    public void createBoardByBoardButton(){
+        createBoardButton.click();
+        createBoardButtonAddBoardTitle.sendKeys();
+
     }
 }
