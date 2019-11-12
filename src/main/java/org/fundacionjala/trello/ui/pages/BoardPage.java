@@ -3,6 +3,7 @@ package org.fundacionjala.trello.ui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -48,6 +49,15 @@ public class BoardPage {
     @FindBy(how = How.CSS, using = ".js-confirm.full.negate")
     private WebElement btnConfirmDeleteCard;
 
+    @FindBy(how = How.CSS, using = ".list-card.js-member-droppable.ui-droppable")
+    private WebElement btnEdit;
+
+    @FindBy(how = How.CSS, using = ".primary.wide.js-save-edits")
+    private WebElement btnSave;
+
+    @FindBy(how = How.XPATH, using = "//textarea[@class='list-card-edit-title js-edit-card-title']")
+    private WebElement txtareaNewCardName;
+
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
         btnAddList.click();
@@ -77,5 +87,25 @@ public class BoardPage {
     public List<WebElement> listOfCards(final String cardName) {
         String node = String.format(xpathCard, cardName);
         return webDriver.findElements(By.xpath(node));
+    }
+
+    public void editCard(final String nameCard) {
+        btnAddCard.click();
+        txtNameCard.sendKeys(nameCard);
+        btnAcceptAddCard.click();
+        btnCancelAddCard.click();
+    }
+
+    public void rigthClickSelectCard(final String nameCard){
+        Actions actions = new Actions(webDriver);
+        String node = String.format("//span[contains(text(),'%s')]", nameCard);
+        WebElement btnEdit =  webDriver.findElement(By.xpath(node));
+        actions.contextClick(btnEdit).perform();
+    }
+
+    public void editCreatedCard(final String nameCard, final String newNameCard){
+        rigthClickSelectCard(nameCard);
+        txtareaNewCardName.sendKeys(newNameCard);
+        btnSave.click();
     }
 }

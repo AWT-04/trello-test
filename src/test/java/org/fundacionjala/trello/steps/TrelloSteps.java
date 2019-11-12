@@ -58,4 +58,9 @@ public class TrelloSteps {
         LoginPage loginPage = new LoginPage();
         dashboardPage = loginPage.loginWithAccount(account);
     }
+
+    @And("I modify the name of card {string} to {string}")
+    public void iModifyTheNameOfCardTo(String nameCard, String newNameCard) {
+        boardPage.editCreatedCard(nameCard, newNameCard);
+    }
 }
