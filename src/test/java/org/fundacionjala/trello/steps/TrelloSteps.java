@@ -5,7 +5,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.core.utils.Environment;
 import org.fundacionjala.trello.pages.common.LoginPage;
 import org.fundacionjala.trello.ui.pages.BoardPage;
 import org.fundacionjala.trello.ui.pages.DashboardPage;
@@ -55,7 +54,7 @@ public class TrelloSteps {
     }
 
     @Given("I log in as {string}")
-    public void iLogInAs(String account) {
+    public void iLogInAs(final String account) {
         LoginPage loginPage = new LoginPage();
         dashboardPage = loginPage.loginWithAccount(account);
     }
