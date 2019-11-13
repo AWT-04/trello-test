@@ -5,7 +5,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.trello.pages.board.BoardCreationPage;
 import org.fundacionjala.trello.pages.common.LoginPage;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.fundacionjala.trello.pages.DashboardPage;
@@ -15,12 +14,10 @@ import java.util.Map;
 public class CardSteps {
 
     private DashboardPage dashboardPage;
-    private BoardCreationPage boardCreationPage;
     private BoardPage boardPage;
 
     public CardSteps(final CommonSteps commonSteps) {
         this.dashboardPage = commonSteps.getDashboardPage();
-
     }
 
     @Then("I should see {string} in the list of cards")
@@ -72,17 +69,17 @@ public class CardSteps {
     }
 
     @And("I should see {string} in the title after selecting card")
-    public void iShouldSeeInTheTitleAfterSelectingCard(String title) {
-        Assert.assertTrue(boardPage.VerifySelectedCardNameInTheTitle(title));
+    public void iShouldSeeInTheTitleAfterSelectingCard(final String title) {
+        Assert.assertTrue(boardPage.verifySelectedCardNameInTheTitle(title));
     }
 
     @And("I should see {string} in list after selecting card")
-    public void iShouldSeeInListAfterSelectingCard(String listName) {
-        Assert.assertTrue(boardPage.VerifyListSelectedCardNameInTheTitle(listName));
+    public void iShouldSeeInListAfterSelectingCard(final String listName) {
+        Assert.assertTrue(boardPage.verifyListSelectedCardNameInTheTitle(listName));
     }
 
     @And("I select the card {string}")
-    public void iSelectTheCard(String title) {
-        boardPage.SelectCard(title);
+    public void iSelectTheCard(final String title) {
+        boardPage.selectCard(title);
     }
 }
