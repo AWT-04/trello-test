@@ -6,15 +6,18 @@ Feature: Create new board in Trello
 
   Scenario: Create new board with boards page
     When I create new board from "boards page" with a:
-      | Title | Fernando |
+      | Title      | Fernando |
+      | Background | green    |
     Then I should see the board
 
   Scenario: Create new board with add button
     When I create new board from "add button" with a:
-      | Title | Fernando |
+      | Title      | Fernando |
+      | Background | blue     |
     Then I should see the board
 
   Scenario: Create new board with board button
     When I create new board from "board button" with a:
-      | Title | Fernando |
+      | Title      | Fernando |
+      | Background | red      |
     Then I should see the board
