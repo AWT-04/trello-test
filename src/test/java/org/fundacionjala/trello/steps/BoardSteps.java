@@ -16,7 +16,6 @@ public class BoardSteps {
 
     public BoardSteps(final CommonSteps commonSteps) {
         this.dashboardPage = commonSteps.getDashboardPage();
-
     }
 
     @When("I create new board from {string} with a:")
