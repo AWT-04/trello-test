@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = {"org.fundacionjala.trello"}
+        glue = {"org.fundacionjala.trello.steps"}
 )
 
 public class Runner extends AbstractTestNGCucumberTests {
