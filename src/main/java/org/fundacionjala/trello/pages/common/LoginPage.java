@@ -42,7 +42,6 @@ public class LoginPage {
         webDriver.manage().timeouts().implicitlyWait(IMPLICIT_TIME, TimeUnit.SECONDS);
         webDriver.get("https://trello.com/login");
         PageFactory.initElements(webDriver, this);
-
     }
 
     public DashboardPage login(final String username, final String password) {
