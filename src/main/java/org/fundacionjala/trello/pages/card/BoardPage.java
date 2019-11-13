@@ -1,4 +1,4 @@
-package org.fundacionjala.trello.pages;
+package org.fundacionjala.trello.pages.card;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

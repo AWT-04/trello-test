@@ -5,15 +5,23 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.fundacionjala.trello.pages.board.BoardCreationPage;
 import org.fundacionjala.trello.pages.common.LoginPage;
-import org.fundacionjala.trello.pages.BoardPage;
+import org.fundacionjala.trello.pages.card.BoardPage;
 import org.fundacionjala.trello.pages.DashboardPage;
 import org.testng.Assert;
 import java.util.Map;
 
-public class TrelloSteps {
+public class CardSteps {
+
     private DashboardPage dashboardPage;
+    private BoardCreationPage boardCreationPage;
     private BoardPage boardPage;
+
+    public CardSteps(final CommonSteps commonSteps) {
+        this.dashboardPage = commonSteps.getDashboardPage();
+
+    }
 
     @Given("I login as user:")
     public void iLoginAsUser(final Map<String, String> user) {
@@ -38,11 +46,6 @@ public class TrelloSteps {
         }
     }
 
-    @And("a board created with the name {string}")
-    public void aBoardCreatedWithTheName(final String boardName) {
-        boardPage = dashboardPage.createBoard(boardName);
-    }
-
     @When("I delete {string} card")
     public void iDeleteCard(final String cardName) {
         boardPage.deleteCard(cardName);
@@ -60,7 +63,17 @@ public class TrelloSteps {
     }
 
     @And("I modify the name of card {string} to {string}")
-    public void iModifyTheNameOfCardTo(String nameCard, String newNameCard) {
+    public void iModifyTheNameOfCardTo(final String nameCard, final String newNameCard) {
         boardPage.editCreatedCard(nameCard, newNameCard);
+    }
+
+    @And("a board created with the name:")
+    public void aBoardCreatedWithTheName(final Map<String, String> board) {
+        boardPage = dashboardPage.createBoard(board.get("Title"));
+    }
+
+    @When("I add a list with the name:")
+    public void iAddAListWithTheName(final Map<String, String> list) {
+        boardPage.createList(list.get("Name"));
     }
 }

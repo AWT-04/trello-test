@@ -1,6 +1,6 @@
 package org.fundacionjala.trello.pages.board;
 
-import org.fundacionjala.trello.pages.BoardPage;
+import org.fundacionjala.trello.pages.card.BoardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

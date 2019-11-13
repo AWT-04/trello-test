@@ -1,21 +1,22 @@
 Feature: Card feature
   As a owner, I want add, delete and update a card, so that I can verify the UI board
 
+Background:
+  Given I log in with the user "owner"
+  And a board created with the name:
+    | Title | My board |
+  And I add a list with the name:
+    | Name | To Do |
+
   Scenario: Create cards in boards
-    Given I log in as "owner"
-    And a board created with the name "My board"
-    When I add a list with the name "To do"
-    And I create the following cards:
+    When I create the following cards:
       | name Card | Selenium tasks |
       | name Card | Java     tasks |
       | name Card | Python tasks   |
     Then I should see "Selenium tasks" in the list of cards
 
   Scenario: Delete a card in boards
-    Given I log in as "owner"
-    And a board created with the name "My board"
-    And I add a list with the name "To do"
-    And I create the following cards:
+    When I create the following cards:
       | name Card | Selenium tasks |
       | name Card | Java     tasks |
       | name Card | Python tasks   |
@@ -23,10 +24,7 @@ Feature: Card feature
     Then I should NOT see "Selenium tasks" in the list of cards
 
   Scenario: Update card name in board
-    Given I log in as "owner"
-    And a board created with the name "My board"
-    When I add a list with the name "To do"
-    And I create the following cards:
+    When I create the following cards:
       | name Card | Selenium tasks |
       | name Card | Java     tasks |
       | name Card | Python tasks   |
