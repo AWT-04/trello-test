@@ -7,16 +7,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class BoardPage {
     private WebDriver webDriver;
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
-    private static final int TIME = 15;
-    private WebDriverWait wait = new WebDriverWait(webDriver, TIME);
 
     public BoardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -115,14 +111,12 @@ public class BoardPage {
     public boolean verifySelectedCardNameInTheTitle(final String nameCard) {
         WebElement txtNameSelectedCard = webDriver.findElement(
                 By.xpath(String.format("//a[@class='action-card' and contains(text(),'%s')]", nameCard)));
-        wait.until(ExpectedConditions.visibilityOf(txtNameSelectedCard));
         return txtNameSelectedCard.getText().contains(nameCard);
     }
 
     public boolean verifyListSelectedCardNameInTheTitle(final String nameList) {
         WebElement txtTitleNameSelectedCard =  webDriver.findElement(
                 By.xpath(String.format("//*[@class='js-open-move-from-header' and contains(text(),'%s')]", nameList)));
-        wait.until(ExpectedConditions.visibilityOf(txtTitleNameSelectedCard));
         return txtTitleNameSelectedCard.getText().contains(nameList);
     }
 }
