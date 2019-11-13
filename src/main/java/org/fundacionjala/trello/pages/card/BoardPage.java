@@ -125,19 +125,18 @@ public class BoardPage {
     }
 
     public boolean VerifySelectedCardNameInTheTitle(final String nameCard){
-//        WebDriverWait wait = new WebDriverWait(webDriver, 15);
-        WebElement txtNameSelectedCard = webDriver.findElement(By.xpath(String.format("//*[@class='card-detail-title-assist js-title-helper' and contains(text(),'%s')]", nameCard)));
-//        wait.until(ExpectedConditions.visibilityOf(txtNameSelectedCard));
+        WebDriverWait wait = new WebDriverWait(webDriver, 15);
+        WebElement txtNameSelectedCard = webDriver.findElement(By.xpath(String.format("//a[@class='action-card' and contains(text(),'%s')]", nameCard)));
+        wait.until(ExpectedConditions.visibilityOf(txtNameSelectedCard));
         System.out.println("selected card text = " + txtNameSelectedCard.getText());
         return txtNameSelectedCard.getText().contains(nameCard);
     }
 
     public boolean VerifyListSelectedCardNameInTheTitle(final String nameList){
-//        WebDriverWait wait = new WebDriverWait(webDriver, 15);
+        WebDriverWait wait = new WebDriverWait(webDriver, 15);
         WebElement txtTitleNameSelectedCard =  webDriver.findElement(By.xpath(String.format("//*[@class='js-open-move-from-header' and contains(text(),'%s')]", nameList)));
-//        wait.until(ExpectedConditions.visibilityOf(txtTitleNameSelectedCard));
+        wait.until(ExpectedConditions.visibilityOf(txtTitleNameSelectedCard));
         System.out.println("selected card list = " + txtTitleNameSelectedCard.getText());
         return txtTitleNameSelectedCard.getText().contains(nameList);
     }
-
 }
