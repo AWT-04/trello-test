@@ -17,7 +17,6 @@ script:
 - gradle compileJava compileTestJava
 - sonar-scanner
 - gradle check
-- gradle executeFeatures
 notifications:
   email: true
 before_install:
