@@ -23,12 +23,6 @@ public class CardSteps {
 
     }
 
-    @Given("I login as user:")
-    public void iLoginAsUser(final Map<String, String> user) {
-        LoginPage loginPage = new LoginPage();
-        dashboardPage = loginPage.login(user.get("name"), user.get("password"));
-    }
-
     @Then("I should see {string} in the list of cards")
     public void iShouldSeeInTheListOfCards(final String cardName) {
         Assert.assertEquals(boardPage.extractTextToTheCard(cardName), cardName);
@@ -75,5 +69,20 @@ public class CardSteps {
     @When("I add a list with the name:")
     public void iAddAListWithTheName(final Map<String, String> list) {
         boardPage.createList(list.get("Name"));
+    }
+
+    @And("I should see {string} in the title after selecting card")
+    public void iShouldSeeInTheTitleAfterSelectingCard(String title) {
+        Assert.assertTrue(boardPage.VerifySelectedCardNameInTheTitle(title));
+    }
+
+    @And("I should see {string} in list after selecting card")
+    public void iShouldSeeInListAfterSelectingCard(String listName) {
+        Assert.assertTrue(boardPage.VerifyListSelectedCardNameInTheTitle(listName));
+    }
+
+    @And("I select the card {string}")
+    public void iSelectTheCard(String title) {
+        boardPage.SelectCard(title);
     }
 }

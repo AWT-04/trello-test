@@ -7,12 +7,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class BoardPage {
     private WebDriver webDriver;
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
+
 
     public BoardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -57,6 +60,12 @@ public class BoardPage {
 
     @FindBy(how = How.XPATH, using = "//textarea[@class='list-card-edit-title js-edit-card-title']")
     private WebElement txtareaNewCardName;
+
+//    @FindBy(how = How.CSS, using = ".card-detail-title-assist.js-title-helper")
+//    private WebElement txtNameSelectedCard;
+//
+//    @FindBy(how = How.CSS, using = ".js-open-move-from-header")
+//    private WebElement txtTitleNameSelectedCard;
 
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
@@ -108,4 +117,27 @@ public class BoardPage {
         txtareaNewCardName.sendKeys(newNameCard);
         btnSave.click();
     }
+
+    public void SelectCard(final String nameCard){
+        String node = String.format("//span[contains(text(),'%s')]", nameCard);
+        WebElement btnSelect = webDriver.findElement(By.xpath(node));
+        btnSelect.click();
+    }
+
+    public boolean VerifySelectedCardNameInTheTitle(final String nameCard){
+//        WebDriverWait wait = new WebDriverWait(webDriver, 15);
+        WebElement txtNameSelectedCard = webDriver.findElement(By.xpath(String.format("//*[@class='card-detail-title-assist js-title-helper' and contains(text(),'%s')]", nameCard)));
+//        wait.until(ExpectedConditions.visibilityOf(txtNameSelectedCard));
+        System.out.println("selected card text = " + txtNameSelectedCard.getText());
+        return txtNameSelectedCard.getText().contains(nameCard);
+    }
+
+    public boolean VerifyListSelectedCardNameInTheTitle(final String nameList){
+//        WebDriverWait wait = new WebDriverWait(webDriver, 15);
+        WebElement txtTitleNameSelectedCard =  webDriver.findElement(By.xpath(String.format("//*[@class='js-open-move-from-header' and contains(text(),'%s')]", nameList)));
+//        wait.until(ExpectedConditions.visibilityOf(txtTitleNameSelectedCard));
+        System.out.println("selected card list = " + txtTitleNameSelectedCard.getText());
+        return txtTitleNameSelectedCard.getText().contains(nameList);
+    }
+
 }

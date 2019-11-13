@@ -1,5 +1,5 @@
 Feature: Card feature
-  As a owner, I want add, delete and update a card, so that I can verify the UI board
+  As owner, I want add, delete and update a card, so that I can verify the UI board
 
 Background:
   Given I log in with the user "owner"
@@ -8,12 +8,21 @@ Background:
   And I add a list with the name:
     | Name | To Do |
 
-  Scenario: Create cards in boards
+  Scenario: Verify the cards creation in list
     When I create the following cards:
       | name Card | Selenium tasks |
       | name Card | Java     tasks |
       | name Card | Python tasks   |
     Then I should see "Selenium tasks" in the list of cards
+
+  Scenario: Verify title in in selected card
+    When I create the following cards:
+      | name Card | Selenium tasks |
+      | name Card | Java     tasks |
+      | name Card | Python tasks   |
+    And I select the card "Selenium tasks"
+    Then I should see "Selenium tasks" in the title after selecting card
+    And I should see "To Do" in list after selecting card
 
   Scenario: Delete a card in boards
     When I create the following cards:
