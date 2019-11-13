@@ -2,7 +2,7 @@ package org.fundacionjala.trello.pages.common;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fundacionjala.core.utils.Environment;
-import org.fundacionjala.trello.ui.pages.DashboardPage;
+import org.fundacionjala.trello.pages.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
