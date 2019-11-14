@@ -16,6 +16,8 @@ Background:
     Then I should see "Selenium tasks" in the list of cards
     And I select the card "Selenium tasks"
     And I should see "Selenium tasks" in the title after selecting card
+    And I shoud see "Selenium tasks" in the page title
+    And I should see "Selenium tasks" in the menu of activity
     And I should see "To Do" in list after selecting card
 
   Scenario: Delete a card in boards
