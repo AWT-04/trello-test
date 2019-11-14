@@ -58,7 +58,8 @@ public class BoardCreationPage {
     }
 
     public String getBackgroundString() {
-        return BACKGROUNDCOLORS.get(backgroundString == null ? "null" : backgroundString.toLowerCase());
+        return "background-color: " + BACKGROUNDCOLORS.get(backgroundString == null
+                ? "null" : backgroundString.toLowerCase()) + ";";
     }
 
     public BoardPage createNewBoard(final Map<BoardFields, String> inputData) {
