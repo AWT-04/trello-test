@@ -6,6 +6,7 @@ import org.fundacionjala.trello.pages.board.DashboardPage;
 import org.fundacionjala.trello.pages.board.BoardCreationPage;
 import org.fundacionjala.trello.pages.board.BoardFields;
 import org.testng.Assert;
+
 import java.util.Map;
 
 public class BoardSteps {
@@ -24,6 +25,7 @@ public class BoardSteps {
 
     @Then("^I should see the board$")
     public void iShouldSeeTheBoard() {
-        Assert.assertEquals(boardCreationPage.getTitleString(), "Fernando");
+        Assert.assertEquals(boardCreationPage.getTitleString(), dashboardPage.getTitleStringHeader());
+        Assert.assertEquals(boardCreationPage.getPrivacyString(), dashboardPage.getPermissionHeader());
     }
 }

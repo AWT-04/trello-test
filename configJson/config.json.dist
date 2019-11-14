@@ -12,4 +12,7 @@
     "url": {
       "trello": ""
     }
+    "local": {
+      "browser": ""
+    }
 }
