@@ -20,7 +20,7 @@ public class BoardCreationPage {
     private String titleString;
     private String privacyString;
     private String backgroundString;
-    private static final int PRIVATE_OUT_IN_SECONDS = 30;
+    private static final int PRIVATE_OUT_IN_SECONDS = 60;
     private static final Map<String, String> BACKGROUNDCOLORS;
 
     static {
@@ -58,7 +58,8 @@ public class BoardCreationPage {
     }
 
     public String getBackgroundString() {
-        return BACKGROUNDCOLORS.get(backgroundString == null ? "null" : backgroundString.toLowerCase());
+        return "background-color: " + BACKGROUNDCOLORS.get(backgroundString == null
+                ? "null" : backgroundString.toLowerCase()) + ";";
     }
 
     public BoardPage createNewBoard(final Map<BoardFields, String> inputData) {

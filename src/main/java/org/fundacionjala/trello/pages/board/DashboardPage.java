@@ -6,11 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 
 public class DashboardPage {
     private WebDriver webDriver;
+    private static final int PRIVATE_OUT_IN_SECONDS = 30;
     private static final String WAY_BOARDS_PAGE = "boards page";
     private static final String WAY_ADD_BUTTON = "add button";
     private static final String WAY_BOARD_BUTTON = "board button";
@@ -103,8 +106,36 @@ public class DashboardPage {
         addButtonHeader.click();
         createNewBoardRightPanel.click();
     }
+
     public void createBoardByBoardButton() {
         boardButtonHeader.click();
         createNewBoardLeftPanel.click();
+    }
+
+    @FindBy(css = "span[class='js-board-editing-target board-header-btn-text']")
+    private WebElement titleHeader;
+
+    public String getTitleStringHeader() {
+        WebDriverWait wait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
+        wait.until(ExpectedConditions.invisibilityOf(titleHeader));
+        return titleHeader.getText();
+    }
+
+    @FindBy(css = "#permission-level")
+    private WebElement permissionHeader;
+
+    public String getPermissionHeader() {
+        WebDriverWait wait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
+        wait.until(ExpectedConditions.visibilityOf(permissionHeader));
+        return permissionHeader.getText().toLowerCase();
+    }
+
+    @FindBy(css = "span[class='board-menu-navigation-item-link-icon js-fill-background-preview']")
+    private WebElement backgroundColor;
+
+    public String getBackgroundColor() {
+        WebDriverWait wait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
+        wait.until(ExpectedConditions.visibilityOf(backgroundColor));
+        return backgroundColor.getAttribute("style");
     }
 }
