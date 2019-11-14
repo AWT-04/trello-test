@@ -2,7 +2,7 @@ package org.fundacionjala.trello.steps;
 
 import io.cucumber.java.en.Given;
 import org.fundacionjala.core.utils.Environment;
-import org.fundacionjala.trello.pages.DashboardPage;
+import org.fundacionjala.trello.pages.board.DashboardPage;
 import org.fundacionjala.trello.pages.common.LoginPage;
 
 public class CommonSteps {

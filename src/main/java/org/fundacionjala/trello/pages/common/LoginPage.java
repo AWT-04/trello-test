@@ -2,13 +2,14 @@ package org.fundacionjala.trello.pages.common;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fundacionjala.core.utils.Environment;
-import org.fundacionjala.trello.pages.DashboardPage;
+import org.fundacionjala.trello.pages.board.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.concurrent.TimeUnit;
 
 public class LoginPage {
@@ -38,7 +39,7 @@ public class LoginPage {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("headless");
-        webDriver = new ChromeDriver(chromeOptions);
+        webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(IMPLICIT_TIME, TimeUnit.SECONDS);
         webDriver.get("https://trello.com/login");
         PageFactory.initElements(webDriver, this);
