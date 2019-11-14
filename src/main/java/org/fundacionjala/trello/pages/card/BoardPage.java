@@ -1,5 +1,7 @@
 package org.fundacionjala.trello.pages.card;
 
+import org.fundacionjala.core.utils.WebDriverAction;
+import org.fundacionjala.trello.pages.list.ListAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,12 +10,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class BoardPage {
     private WebDriver webDriver;
+    protected WebDriverWait webDriverWait;
+    protected WebDriverAction webDriverAction;
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
+
 
     public BoardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -172,7 +178,6 @@ public class BoardPage {
     }
 
     public void addList(final String name) {
-        WebElement addAnotherList = webDriver.findElement(By.cssSelector("[class='js-add-list list-wrapper mod-add is-idle']"));
         listName.sendKeys(name);
         buttonAddList.click();
     }
@@ -207,4 +212,21 @@ public class BoardPage {
         searchDrawer.sendKeys(boardName);
         firstFoundFile.click();
     }
+
+    public ListAction openMenuList(final String nameList) {
+        final String ancestor = "ancestor::div[contains(@class,'list js-list-content')]";
+        final String descendant = "descendant::*[@class='list-header-extras']";
+        WebElement nameListSelected = webDriver.findElement(By.xpath(String.format(
+                "//textarea[@aria-label='%s']/%s/%s",
+                nameList, ancestor, descendant)));
+        nameListSelected.click();
+        return new ListAction(webDriver, webDriverWait, webDriverAction);
+    }
+
+    public boolean verifyListExist(final String nameList) {
+        By element = By.xpath(String.format("//textarea[@aria-label='%s']", nameList));
+        return webDriverAction.isExistingSelector(element);
+    }
+
+
 }

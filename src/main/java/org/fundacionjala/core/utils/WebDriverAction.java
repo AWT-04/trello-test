@@ -1,6 +1,7 @@
 package org.fundacionjala.core.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,5 +41,14 @@ public class WebDriverAction {
 
     public void waitVisibility(final By element) {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(element));
+    }
+
+    public boolean isExistingSelector(final By element) {
+        try {
+            webDriver.findElement(element);
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        return true;
     }
 }

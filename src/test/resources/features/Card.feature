@@ -18,7 +18,7 @@ Feature: Card feature
     And I should see "Selenium tasks" in the title after selecting card
     And I shoud see "Selenium tasks" in the page title
     And I should see "Selenium tasks" in the menu of activity
-    And I should see "To Do" in list after selecting card
+
 
   Scenario: Update card name in board
     When I create the following cards:
