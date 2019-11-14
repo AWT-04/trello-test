@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -57,6 +58,39 @@ public class BoardPage {
 
     @FindBy(how = How.XPATH, using = "//textarea[@class='list-card-edit-title js-edit-card-title']")
     private WebElement txtareaNewCardName;
+
+    @FindBy(css = ".list-name-input")
+    private WebElement listName;
+
+    @FindBy(css = ".mod-list-add-button")
+    private WebElement buttonAddList;
+
+    @FindBy(css = ".js-add-a-card")
+    private WebElement buttonAddCard;
+
+    @FindBy(xpath = "//*[@class=\"list-header js-list-header u-clearfix is-menu-shown is-subscribe-shown\"]")
+    private WebElement headerList;
+
+    @FindBy(xpath = "//*[@id=\"board\"]")
+    private WebElement lists;
+
+    @FindBy(css = ".js-editing-target")
+    private WebElement listEdit;
+
+    @FindBy(css = ".list-header-name.mod-list-name.js-list-name-input")
+    private WebElement listEditText;
+
+    @FindBy(css = "a.list-header-extras-menu.dark-hover.js-open-list-menu.icon-lg.icon-overflow-menu-horizontal")
+    private WebElement menuList;
+
+    @FindBy(css = ".js-move-list")
+    private WebElement moveList;
+
+    @FindBy(css = ".header-search-input")
+    private WebElement searchDrawer;
+
+    @FindBy(css = ".search-results-section .compact-board-tile-link-text-name")
+    private WebElement firstFoundFile;
 
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
@@ -128,5 +162,49 @@ public class BoardPage {
         WebElement node = webDriver.findElement(By.xpath(String.format(
                 "//a[contains(text(),'%s')]", nameCard)));
         return  node.getText().contains(nameCard);
+    }
+
+    public void editList(final String name) {
+        listEdit.click();
+        listEditText.clear();
+        listEditText.sendKeys(name);
+        buttonAddList.click();
+    }
+
+    public void addList(final String name) {
+        WebElement addAnotherList = webDriver.findElement(By.cssSelector("[class='js-add-list list-wrapper mod-add is-idle']"));
+        listName.sendKeys(name);
+        buttonAddList.click();
+    }
+
+    public void addSeveralList(final List<String> lists) {
+        for (String list : lists) {
+            addList(list);
+        }
+    }
+
+    public String getTitleList(final String listName) {
+        String listXpath = String.format("//*[text()='%s' and contains(@class,'js-list-name-input')]", listName);
+        By listSelectorName = By.xpath(listXpath);
+        return headerList.findElement(listSelectorName).getText();
+    }
+
+    public int getSizeList() {
+        return lists.findElements(By.cssSelector("div.js-list.list-wrapper")).size();
+    }
+
+    public void changeListToBoard(final String board) {
+        menuList.click();
+        moveList.click();
+        By selectBoard = By.cssSelector("select.js-select-board");
+        Select dropdown = new Select(webDriver.findElement(selectBoard));
+        dropdown.selectByVisibleText(board);
+        WebElement moveButton = webDriver.findElement(By.xpath("//*[@class='primary wide js-commit-position']"));
+        moveButton.click();
+    }
+
+    public void openBoardDrawer(final String boardName) {
+        searchDrawer.sendKeys(boardName);
+        firstFoundFile.click();
     }
 }
