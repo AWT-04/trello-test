@@ -2,7 +2,7 @@ package org.fundacionjala.trello.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.trello.pages.DashboardPage;
+import org.fundacionjala.trello.pages.board.DashboardPage;
 import org.fundacionjala.trello.pages.board.BoardCreationPage;
 import org.fundacionjala.trello.pages.board.BoardFields;
 import org.testng.Assert;

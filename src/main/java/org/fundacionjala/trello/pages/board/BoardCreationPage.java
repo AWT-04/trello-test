@@ -1,6 +1,7 @@
 package org.fundacionjala.trello.pages.board;
 
 import org.fundacionjala.trello.pages.card.BoardPage;
+import org.fundacionjala.trello.pages.common.ISteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -36,6 +38,12 @@ public class BoardCreationPage {
     @FindBy(css = "button[data-test-id='create-board-submit-button']")
     private WebElement createBoardButton;
 
+    //Privacy
+    @FindBy(css = "button[class='subtle-chooser-trigger unstyled-button vis-chooser-trigger']")
+    private WebElement selectPrivacyButton;
+    @FindBy(css = "input[class='js-confirm full primary']")
+    private WebElement confirmPublicButton;
+
     public BoardCreationPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
@@ -60,6 +68,7 @@ public class BoardCreationPage {
         webDriverWait.until(ExpectedConditions.visibilityOf(addBoardTitle));
         enumMap.put(BoardFields.TITLE, () -> addBoardTitle.sendKeys(titleString));
         enumMap.put(BoardFields.BACKGROUND, () -> selectBackground(inputData));
+        enumMap.put(BoardFields.PRIVACY, () -> selectPrivacy(inputData));
 
         for (BoardFields key : inputData.keySet()) {
             enumMap.get(key).execute();
@@ -74,5 +83,18 @@ public class BoardCreationPage {
                 backgroundString);
         By colorBgButton = By.cssSelector(locatorColorBackgroundButton);
         webDriver.findElement(colorBgButton).click();
+    }
+
+    public void selectPrivacy(final Map<BoardFields, String> inputData) {
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
+        privacyString = inputData.get(BoardFields.PRIVACY);
+        if (privacyString.equals("public")) {
+            webDriverWait.until(ExpectedConditions.visibilityOf(selectPrivacyButton));
+            selectPrivacyButton.click();
+            String privacyButtonString = String.format("[class$='%s']", privacyString);
+            By privacyButtonLocator = By.cssSelector(privacyButtonString);
+            webDriver.findElement(privacyButtonLocator).click();
+            confirmPublicButton.click();
+        }
     }
 }
