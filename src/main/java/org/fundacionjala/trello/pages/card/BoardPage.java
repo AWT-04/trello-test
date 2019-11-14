@@ -119,4 +119,14 @@ public class BoardPage {
                 By.xpath(String.format("//*[@class='js-open-move-from-header' and contains(text(),'%s')]", nameList)));
         return txtTitleNameSelectedCard.getText().contains(nameList);
     }
+
+    public boolean verifyPageTtile(final String nameCard) {
+        return webDriver.getTitle().contains(nameCard);
+    }
+
+    public boolean verifyCardNameInTheMenuActivity(final String nameCard) {
+        WebElement node = webDriver.findElement(By.xpath(String.format(
+                "//a[contains(text(),'%s')]", nameCard)));
+        return  node.getText().contains(nameCard);
+    }
 }
