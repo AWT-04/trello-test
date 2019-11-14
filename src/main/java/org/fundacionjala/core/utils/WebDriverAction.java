@@ -1,4 +1,4 @@
-package org.fundacionjala.core.ui.driver;
+package org.fundacionjala.core.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
