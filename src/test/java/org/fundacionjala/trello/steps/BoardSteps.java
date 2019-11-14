@@ -27,6 +27,5 @@ public class BoardSteps {
     public void iShouldSeeTheBoard() {
         Assert.assertEquals(boardCreationPage.getTitleString(), dashboardPage.getTitleStringHeader());
         Assert.assertEquals(boardCreationPage.getPrivacyString(), dashboardPage.getPermissionHeader());
-        Assert.assertEquals(boardCreationPage.getBackgroundString(), dashboardPage.getBackgroundColor());
     }
 }
