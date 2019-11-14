@@ -1,12 +1,12 @@
 Feature: Card feature
   As owner, I want add, delete and update a card, so that I can verify the UI board
 
-Background:
-  Given I log in with the user "owner"
-  And a board created with the name:
-    | Title | My board |
-  And I add a list with the name:
-    | Name | To Do |
+  Background:
+    Given I log in with the user "owner"
+    And a board created with the name:
+      | Title | My board |
+    And I add a list with the name:
+      | Name | To Do |
 
   Scenario: Verify the cards creation in list
     When I create the following cards:
@@ -25,6 +25,7 @@ Background:
       | name Card | Selenium tasks |
       | name Card | Java     tasks |
       | name Card | Python tasks   |
+      | name Card | C# tasks       |
     When I delete "Selenium tasks" card
     Then I should NOT see "Selenium tasks" in the list of cards
 
