@@ -120,11 +120,11 @@ public class BoardPage {
         return txtTitleNameSelectedCard.getText().contains(nameList);
     }
 
-    public boolean verifyPageTtile(final String nameCard){
+    public boolean verifyPageTtile(final String nameCard) {
         return webDriver.getTitle().contains(nameCard);
     }
 
-    public boolean verifyCardNameInTheMenuActivity(final String nameCard){
+    public boolean verifyCardNameInTheMenuActivity(final String nameCard) {
         WebElement node = webDriver.findElement(By.xpath(String.format(
                 "//a[contains(text(),'%s')]", nameCard)));
         return  node.getText().contains(nameCard);

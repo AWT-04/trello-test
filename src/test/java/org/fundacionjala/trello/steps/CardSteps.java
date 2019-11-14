@@ -84,12 +84,12 @@ public class CardSteps {
     }
 
     @And("I shoud see {string} in the page title")
-    public void iShoudSeeInThePageTitle(String nameCard) {
+    public void iShoudSeeInThePageTitle(final String nameCard) {
         Assert.assertTrue(boardPage.verifyPageTtile(nameCard));
     }
 
     @And("I should see {string} in the menu of activity")
-    public void iShouldSeeInTheMenuOfActivity(String pageName) {
+    public void iShouldSeeInTheMenuOfActivity(final String pageName) {
         Assert.assertTrue(boardPage.verifyCardNameInTheMenuActivity(pageName));
     }
 }
