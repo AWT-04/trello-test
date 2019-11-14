@@ -20,7 +20,7 @@ public class BoardCreationPage {
     private String titleString;
     private String privacyString;
     private String backgroundString;
-    private static final int PRIVATE_OUT_IN_SECONDS = 30;
+    private static final int PRIVATE_OUT_IN_SECONDS = 60;
     private static final Map<String, String> BACKGROUNDCOLORS;
 
     static {
