@@ -134,7 +134,6 @@ public class DashboardPage {
     private WebElement backgroundColor;
 
     public String getBackgroundColor() {
-        WebDriverWait wait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
         return backgroundColor.getAttribute("style");
     }
 }
