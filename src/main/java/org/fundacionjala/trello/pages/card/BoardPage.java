@@ -128,6 +128,5 @@ public class BoardPage {
         WebElement node = webDriver.findElement(By.xpath(String.format(
                 "//a[contains(text(),'%s')]", nameCard)));
         return  node.getText().contains(nameCard);
-
     }
 }
