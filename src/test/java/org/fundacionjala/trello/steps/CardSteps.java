@@ -92,4 +92,9 @@ public class CardSteps {
     public void iShouldSeeInTheMenuOfActivity(final String pageName) {
         Assert.assertTrue(boardPage.verifyCardNameInTheMenuActivity(pageName));
     }
+
+    @And("I should NOT see {string} in the menu of activity")
+    public void iShouldNOTSeeInTheMenuOfActivity(final String pageName) {
+        Assert.assertFalse(boardPage.verifyCardNameInTheMenuActivity(pageName));
+    }
 }
