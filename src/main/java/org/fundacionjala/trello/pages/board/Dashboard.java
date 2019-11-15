@@ -5,6 +5,7 @@ import org.fundacionjala.trello.pages.common.ISteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+
 import java.util.HashMap;
 
 public class Dashboard extends AbstractPage {
@@ -34,21 +35,48 @@ public class Dashboard extends AbstractPage {
         waysToCreateBoard.put(WAY_ADD_BUTTON, this::createBoardByAddButton);
         waysToCreateBoard.put(WAY_BOARD_BUTTON, this::createBoardByBoardButton);
         waysToCreateBoard.get(wayCreateProject).execute();
-        return new BoardCreationPage(webDriver);
+        return new BoardCreationPage();
     }
 
     public void createBoardByCentralButton() {
+        webDriverAction.waitVisibility(createBoardButton);
         createBoardButton.click();
     }
 
     public void createBoardByAddButton() {
+        webDriverAction.waitVisibility(addButtonHeader);
         addButtonHeader.click();
+        webDriverAction.waitVisibility(createNewBoardRightPanel);
         createNewBoardRightPanel.click();
     }
 
     public void createBoardByBoardButton() {
         boardButtonHeader.click();
         createNewBoardLeftPanel.click();
+    }
+
+    @FindBy(css = "span[class='js-board-editing-target board-header-btn-text']")
+    private WebElement titleHeader;
+
+    public String getTitleStringHeader() {
+        webDriverAction.waitVisibility(titleHeader);
+        return titleHeader.getText();
+    }
+
+    @FindBy(css = "#permission-level")
+    private WebElement permissionHeader;
+
+    public String getPermissionHeader() {
+        webDriverAction.waitVisibility(permissionHeader);
+        return permissionHeader.getText().toLowerCase();
+    }
+
+    @FindBy(css = "span[class='board-menu-navigation-item-link-icon js-fill-background-preview']")
+    private WebElement backgroundColor;
+
+    public String getBackgroundColor() {
+        webDriverAction.waitVisibility(backgroundColor);
+        return backgroundColor.getAttribute("style");
     }
 
 }

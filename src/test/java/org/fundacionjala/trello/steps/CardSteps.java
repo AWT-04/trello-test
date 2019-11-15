@@ -2,23 +2,23 @@ package org.fundacionjala.trello.steps;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.trello.pages.common.LoginPage;
+import org.fundacionjala.trello.pages.board.Dashboard;
 import org.fundacionjala.trello.pages.card.BoardPage;
-import org.fundacionjala.trello.pages.board.DashboardPage;
 import org.testng.Assert;
+
 import java.util.Map;
 
 public class CardSteps {
 
-    private DashboardPage dashboardPage;
+    private Dashboard dashboardPage;
     private BoardPage boardPage;
 
-    public CardSteps(final CommonSteps commonSteps) {
-        this.dashboardPage = commonSteps.getDashboardPage();
+    public CardSteps(final BoardPage boardPage) {
+        this.boardPage = boardPage;
     }
+
 
     @Then("I should see {string} in the list of cards")
     public void iShouldSeeInTheListOfCards(final String cardName) {
@@ -47,20 +47,9 @@ public class CardSteps {
         Assert.assertTrue(boardPage.listOfCards(cardName).isEmpty());
     }
 
-    @Given("I log in as {string}")
-    public void iLogInAs(final String account) {
-        LoginPage loginPage = new LoginPage();
-        dashboardPage = loginPage.loginWithAccount(account);
-    }
-
     @And("I modify the name of card {string} to {string}")
     public void iModifyTheNameOfCardTo(final String nameCard, final String newNameCard) {
         boardPage.editCreatedCard(nameCard, newNameCard);
-    }
-
-    @And("a board created with the name:")
-    public void aBoardCreatedWithTheName(final Map<String, String> board) {
-        boardPage = dashboardPage.createBoard(board.get("Title"));
     }
 
     @When("I add a list with the name:")

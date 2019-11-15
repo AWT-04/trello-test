@@ -9,17 +9,15 @@ public final class DriverManager {
     private WebDriver webDriver;
     private WebDriverWait webDriverWait;
     private static final int TIME_OUT_IN_SECONDS = 15;
-    private static DriverManager ourInstance;
+    private static DriverManager ourInstance = new DriverManager();
 
     public static DriverManager getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new DriverManager();
-        }
         return ourInstance;
     }
 
     private DriverManager() {
         String browser = Environment.getInstance().getValue("$['local']['browser']").toUpperCase();
+        webDriver = DriverFactory.getDriverManager(DriverType.valueOf(browser));
         webDriverWait = new WebDriverWait(webDriver, TIME_OUT_IN_SECONDS);
         webDriver.get("https://trello.com/login");
     }
