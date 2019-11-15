@@ -8,10 +8,8 @@ import io.cucumber.java.en.When;
 import org.fundacionjala.trello.pages.common.LoginPage;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.fundacionjala.trello.pages.board.DashboardPage;
-import org.fundacionjala.trello.pages.list.ListAction;
 import org.testng.Assert;
 import java.util.Map;
-import static org.testng.Assert.assertFalse;
 
 public class CardSteps {
 
@@ -101,7 +99,7 @@ public class CardSteps {
     }
 
     @Then("I should see the list {string} in the board")
-    public void iShouldSeeTheListInTheBoard(String nameList) {
+    public void iShouldSeeTheListInTheBoard(final String nameList) {
         Assert.assertEquals(boardPage.getTitleList(nameList), nameList);
     }
 
