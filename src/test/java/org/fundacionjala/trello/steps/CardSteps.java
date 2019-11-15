@@ -5,25 +5,18 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.core.utils.WebDriverAction;
 import org.fundacionjala.trello.pages.common.LoginPage;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.fundacionjala.trello.pages.board.DashboardPage;
 import org.fundacionjala.trello.pages.list.ListAction;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.util.Map;
-
 import static org.testng.Assert.assertFalse;
 
 public class CardSteps {
 
     private DashboardPage dashboardPage;
     private BoardPage boardPage;
-    protected WebDriverWait webDriverWait;
-    protected WebDriverAction webDriverAction;
-    private WebDriver webDriver;
 
     public CardSteps(final CommonSteps commonSteps) {
         this.dashboardPage = commonSteps.getDashboardPage();
@@ -114,15 +107,11 @@ public class CardSteps {
 
     @And("I archive the list:")
     public void iArchiveTheList(final Map<String, String> data) {
-        final String nameList = data.get("Name");
-        boardPage.openMenuList(nameList);
-        ListAction listAction = new ListAction(webDriver, webDriverWait, webDriverAction);
-        listAction.archiveList();
+        boardPage.openMenuList(data.get("Name"));
     }
 
     @Then("I don't should see the list:")
     public void iDonTShouldSeeTheList(final Map<String, String> table) {
-        final String nameList = table.get("Name");
-        assertFalse(boardPage.verifyListExist(nameList));
+        Assert.assertTrue(boardPage.listOfCards(table.get("Name")).isEmpty());
     }
 }

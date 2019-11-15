@@ -1,7 +1,6 @@
 package org.fundacionjala.trello.pages.card;
 
 import org.fundacionjala.core.utils.WebDriverAction;
-import org.fundacionjala.trello.pages.list.ListAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -97,6 +96,9 @@ public class BoardPage {
 
     @FindBy(css = ".search-results-section .compact-board-tile-link-text-name")
     private WebElement firstFoundFile;
+
+    @FindBy(css = ".js-close-list")
+    private WebElement archiveListButton;
 
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
@@ -213,14 +215,14 @@ public class BoardPage {
         firstFoundFile.click();
     }
 
-    public ListAction openMenuList(final String nameList) {
+    public void openMenuList(final String nameList) {
         final String ancestor = "ancestor::div[contains(@class,'list js-list-content')]";
         final String descendant = "descendant::*[@class='list-header-extras']";
         WebElement nameListSelected = webDriver.findElement(By.xpath(String.format(
                 "//textarea[@aria-label='%s']/%s/%s",
                 nameList, ancestor, descendant)));
         nameListSelected.click();
-        return new ListAction(webDriver, webDriverWait, webDriverAction);
+        archiveListButton.click();
     }
 
     public boolean verifyListExist(final String nameList) {
