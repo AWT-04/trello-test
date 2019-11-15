@@ -30,13 +30,6 @@ public class CardSteps {
         boardPage.createList(listName);
     }
 
-    @And("I create the following cards:")
-    public void iCreateTheFollowingCards(final DataTable cards) {
-        for (int i = 0; i < cards.height(); i++) {
-            boardPage.createCard(cards.cell(i, 1));
-        }
-    }
-
     @When("I delete {string} card")
     public void iDeleteCard(final String cardName) {
         boardPage.deleteCard(cardName);
@@ -83,11 +76,6 @@ public class CardSteps {
         boardPage.selectCard(title);
     }
 
-    @And("I shoud see {string} in the page title")
-    public void iShoudSeeInThePageTitle(final String nameCard) {
-        Assert.assertTrue(boardPage.verifyPageTtile(nameCard));
-    }
-
     @And("I should see {string} in the menu of activity")
     public void iShouldSeeInTheMenuOfActivity(final String pageName) {
         Assert.assertTrue(boardPage.verifyCardNameInTheMenuActivity(pageName));
@@ -111,5 +99,15 @@ public class CardSteps {
     @Then("I don't should see the list:")
     public void iDonTShouldSeeTheList(final Map<String, String> table) {
         Assert.assertTrue(boardPage.listOfCards(table.get("Name")).isEmpty());
+    }
+
+    @When("I create the following card:")
+    public void iCreateTheFollowingCard(final Map<String, String> table) {
+        boardPage.createCard(table.get("Name"));
+    }
+
+    @And("I should see {string} in the page title")
+    public void iShouldSeeInThePageTitle(String nameCard) {
+        Assert.assertTrue(boardPage.verifyPageTtile(nameCard));
     }
 }
