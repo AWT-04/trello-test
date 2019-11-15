@@ -25,40 +25,40 @@ public class BoardPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(how = How.CSS, using = ".list-name-input")
+    @FindBy(css = ".list-name-input")
     private WebElement txtNameList;
 
-    @FindBy(how = How.CSS, using = ".mod-list-add-button.js-save-edit")
+    @FindBy(css = ".mod-list-add-button.js-save-edit")
     private WebElement btnAddList;
 
-    @FindBy(how = How.CSS, using = ".open-card-composer.card-templates-enabled.js-open-card-composer")
+    @FindBy(css = ".open-card-composer.card-templates-enabled.js-open-card-composer")
     private WebElement btnAddCard;
 
-    @FindBy(how = How.CSS, using = ".js-cancel-edit")
+    @FindBy(css = ".js-cancel-edit")
     private WebElement btnExitCard;
 
-    @FindBy(how = How.CSS, using = ".list-card-composer-textarea.js-card-title")
+    @FindBy(css = ".list-card-composer-textarea.js-card-title")
     private WebElement txtNameCard;
 
-    @FindBy(how = How.CSS, using = ".js-add-card")
+    @FindBy(css = ".js-add-card")
     private WebElement btnAcceptAddCard;
 
-    @FindBy(how = How.CSS, using = ".js-cancel")
+    @FindBy(css = ".js-cancel")
     private WebElement btnCancelAddCard;
 
-    @FindBy(how = How.CSS, using = ".button-link.js-archive-card")
+    @FindBy(css = ".button-link.js-archive-card")
     private WebElement btnArchiveCard;
 
-    @FindBy(how = How.CSS, using = ".button-link.js-delete-card.negate")
+    @FindBy(css = ".button-link.js-delete-card.negate")
     private WebElement btnDeleteCard;
 
-    @FindBy(how = How.CSS, using = ".js-confirm.full.negate")
+    @FindBy(css = ".js-confirm.full.negate")
     private WebElement btnConfirmDeleteCard;
 
-    @FindBy(how = How.CSS, using = ".list-card.js-member-droppable.ui-droppable")
+    @FindBy(css = ".list-card.js-member-droppable.ui-droppable")
     private WebElement btnEdit;
 
-    @FindBy(how = How.CSS, using = ".primary.wide.js-save-edits")
+    @FindBy(css = ".primary.wide.js-save-edits")
     private WebElement btnSave;
 
     @FindBy(how = How.XPATH, using = "//textarea[@class='list-card-edit-title js-edit-card-title']")
@@ -73,10 +73,10 @@ public class BoardPage {
     @FindBy(css = ".js-add-a-card")
     private WebElement buttonAddCard;
 
-    @FindBy(xpath = "//*[@class=\"list-header js-list-header u-clearfix is-menu-shown is-subscribe-shown\"]")
+    @FindBy(xpath = "//*[@class='list-header js-list-header u-clearfix is-menu-shown is-subscribe-shown']")
     private WebElement headerList;
 
-    @FindBy(xpath = "//*[@id=\"board\"]")
+    @FindBy(xpath = "//*[@id='board']")
     private WebElement lists;
 
     @FindBy(css = ".js-editing-target")
@@ -99,6 +99,33 @@ public class BoardPage {
 
     @FindBy(css = ".js-close-list")
     private WebElement archiveListButton;
+
+    @FindBy(xpath = "//textarea[@class='mod-card-back-title js-card-detail-title-input is-editing']")
+    private WebElement txtAreaCardName;
+
+    @FindBy(xpath = "//a[@class='description-fake-text-area hide-on-edit js-edit-desc js-hide-with-draft']")
+    private WebElement btnDescription;
+
+    @FindBy(xpath = "//textarea[@class='field field-autosave js-description-draft description card-description']")
+    private WebElement txtDescription;
+
+    @FindBy(xpath = "//textarea[@class='comment-box-input js-new-comment-input']")
+    private WebElement btnComment;
+
+    @FindBy(xpath = "//textarea[@class='comment-box-input js-new-comment-input']")
+    private WebElement txtComment;
+
+    @FindBy(xpath = "//textarea[@class='mod-card-back-title js-card-detail-title-input']")
+    private WebElement btnAreaCardName;
+
+    @FindBy(xpath = "//input[@class='primary confirm mod-no-top-bottom-margin js-add-comment']")
+    private WebElement btnSaveComment;
+
+    @FindBy(xpath = "//input[@class='primary confirm mod-submit-edit js-save-edit']")
+    private WebElement btnSaveDescription;
+
+    @FindBy(xpath = "//a[@class='icon-md icon-close dialog-close-button js-close-window']")
+    private WebElement btnCloseCardForm;
 
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
@@ -230,5 +257,18 @@ public class BoardPage {
         return webDriverAction.isExistingSelector(element);
     }
 
-
+    public void updteDataFromForm(final String nameCard, final String newCardName,
+                                  final String description, final String comment) {
+        selectCard(nameCard);
+        btnAreaCardName.click();
+        txtAreaCardName.clear();
+        txtAreaCardName.sendKeys(newCardName);
+        txtDescription.click();
+        txtDescription.sendKeys(description);
+        btnSaveDescription.click();
+        txtComment.click();
+        txtComment.sendKeys(comment);
+        btnSaveComment.click();
+        btnCloseCardForm.click();
+    }
 }

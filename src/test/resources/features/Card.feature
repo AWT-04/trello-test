@@ -17,6 +17,19 @@ Feature: Card feature
     And I should see "Selenium tasks" in the title after selecting card
     And I should see "Selenium tasks" in the page title
 
+  Scenario: Update card name in board from the card form
+    When I create the following card:
+      | Name | Selenium tasks |
+    And I modify card "Selenium tasks" with the following data:
+      | Name        | New Selenium 3.0           |
+      | Description | Tasks for writing more tests |
+      | Comment     | Should be done today         |
+    Then I should see "New Selenium 3.0" in the list of cards
+    And I select the card "New Selenium 3.0"
+    And I should see "New Selenium 3.0" in the title after selecting card
+    And I should see "New Selenium 3.0" in the page title
+    And I should see "New Selenium 3.0" in the menu of activity
+
   Scenario: Update card name in board
     When I create the following card:
       | Name | Selenium tasks |
@@ -26,7 +39,6 @@ Feature: Card feature
     And I should see "New Selenium 3.0" in the title after selecting card
     And I should see "New Selenium 3.0" in the page title
     And I should see "New Selenium 3.0" in the menu of activity
-    And I should see "To Do" in list after selecting card
 
   Scenario: Delete a card in boards
     When I create the following card:

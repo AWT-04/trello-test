@@ -9,8 +9,8 @@ Feature: List feature
   Scenario: Verify the list creation in a board
     When I add a list with the name:
       | Name | To Do |
-    And I create the following cards:
-      | name Card | Selenium tasks |
+    And I create the following card:
+      | Name | Selenium tasks |
     Then I should see the list "To Do" in the board
     And I select the card "Selenium tasks"
     And I should see "To Do" in list after selecting card

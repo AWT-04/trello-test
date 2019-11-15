@@ -1,6 +1,5 @@
 package org.fundacionjala.trello.steps;
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -107,7 +106,12 @@ public class CardSteps {
     }
 
     @And("I should see {string} in the page title")
-    public void iShouldSeeInThePageTitle(String nameCard) {
+    public void iShouldSeeInThePageTitle(final String nameCard) {
         Assert.assertTrue(boardPage.verifyPageTtile(nameCard));
+    }
+
+    @And("I modify card {string} with the following data:")
+    public void iModifyCardWithTheFollowingData(final String cardName, final Map<String, String> data) {
+        boardPage.updteDataFromForm(cardName, data.get("Name"), data.get("Description"), data.get("Comment"));
     }
 }
