@@ -4,15 +4,12 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.trello.pages.board.Dashboard;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.testng.Assert;
 
 import java.util.Map;
 
 public class CardSteps {
-
-    private Dashboard dashboardPage;
     private BoardPage boardPage;
 
     public CardSteps(final BoardPage boardPage) {
