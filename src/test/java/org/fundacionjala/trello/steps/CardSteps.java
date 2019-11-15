@@ -97,4 +97,19 @@ public class CardSteps {
     public void iShouldNOTSeeInTheMenuOfActivity(final String pageName) {
         Assert.assertFalse(boardPage.verifyCardNameInTheMenuActivity(pageName));
     }
+
+    @Then("I should see the list {string} in the board")
+    public void iShouldSeeTheListInTheBoard(final String nameList) {
+        Assert.assertEquals(boardPage.getTitleList(nameList), nameList);
+    }
+
+    @And("I archive the list:")
+    public void iArchiveTheList(final Map<String, String> data) {
+        boardPage.openMenuList(data.get("Name"));
+    }
+
+    @Then("I don't should see the list:")
+    public void iDonTShouldSeeTheList(final Map<String, String> table) {
+        Assert.assertTrue(boardPage.listOfCards(table.get("Name")).isEmpty());
+    }
 }

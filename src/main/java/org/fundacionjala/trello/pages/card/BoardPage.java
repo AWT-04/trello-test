@@ -1,5 +1,6 @@
 package org.fundacionjala.trello.pages.card;
 
+import org.fundacionjala.core.utils.WebDriverAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,12 +8,17 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class BoardPage {
     private WebDriver webDriver;
+    protected WebDriverWait webDriverWait;
+    protected WebDriverAction webDriverAction;
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
+
 
     public BoardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -57,6 +63,42 @@ public class BoardPage {
 
     @FindBy(how = How.XPATH, using = "//textarea[@class='list-card-edit-title js-edit-card-title']")
     private WebElement txtareaNewCardName;
+
+    @FindBy(css = ".list-name-input")
+    private WebElement listName;
+
+    @FindBy(css = ".mod-list-add-button")
+    private WebElement buttonAddList;
+
+    @FindBy(css = ".js-add-a-card")
+    private WebElement buttonAddCard;
+
+    @FindBy(xpath = "//*[@class=\"list-header js-list-header u-clearfix is-menu-shown is-subscribe-shown\"]")
+    private WebElement headerList;
+
+    @FindBy(xpath = "//*[@id=\"board\"]")
+    private WebElement lists;
+
+    @FindBy(css = ".js-editing-target")
+    private WebElement listEdit;
+
+    @FindBy(css = ".list-header-name.mod-list-name.js-list-name-input")
+    private WebElement listEditText;
+
+    @FindBy(css = "a.list-header-extras-menu.dark-hover.js-open-list-menu.icon-lg.icon-overflow-menu-horizontal")
+    private WebElement menuList;
+
+    @FindBy(css = ".js-move-list")
+    private WebElement moveList;
+
+    @FindBy(css = ".header-search-input")
+    private WebElement searchDrawer;
+
+    @FindBy(css = ".search-results-section .compact-board-tile-link-text-name")
+    private WebElement firstFoundFile;
+
+    @FindBy(css = ".js-close-list")
+    private WebElement archiveListButton;
 
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
@@ -129,4 +171,64 @@ public class BoardPage {
                 "//a[contains(text(),'%s')]", nameCard)));
         return  node.getText().contains(nameCard);
     }
+
+    public void editList(final String name) {
+        listEdit.click();
+        listEditText.clear();
+        listEditText.sendKeys(name);
+        buttonAddList.click();
+    }
+
+    public void addList(final String name) {
+        listName.sendKeys(name);
+        buttonAddList.click();
+    }
+
+    public void addSeveralList(final List<String> lists) {
+        for (String list : lists) {
+            addList(list);
+        }
+    }
+
+    public String getTitleList(final String listName) {
+        String listXpath = String.format("//*[text()='%s' and contains(@class,'js-list-name-input')]", listName);
+        By listSelectorName = By.xpath(listXpath);
+        return headerList.findElement(listSelectorName).getText();
+    }
+
+    public int getSizeList() {
+        return lists.findElements(By.cssSelector("div.js-list.list-wrapper")).size();
+    }
+
+    public void changeListToBoard(final String board) {
+        menuList.click();
+        moveList.click();
+        By selectBoard = By.cssSelector("select.js-select-board");
+        Select dropdown = new Select(webDriver.findElement(selectBoard));
+        dropdown.selectByVisibleText(board);
+        WebElement moveButton = webDriver.findElement(By.xpath("//*[@class='primary wide js-commit-position']"));
+        moveButton.click();
+    }
+
+    public void openBoardDrawer(final String boardName) {
+        searchDrawer.sendKeys(boardName);
+        firstFoundFile.click();
+    }
+
+    public void openMenuList(final String nameList) {
+        final String ancestor = "ancestor::div[contains(@class,'list js-list-content')]";
+        final String descendant = "descendant::*[@class='list-header-extras']";
+        WebElement nameListSelected = webDriver.findElement(By.xpath(String.format(
+                "//textarea[@aria-label='%s']/%s/%s",
+                nameList, ancestor, descendant)));
+        nameListSelected.click();
+        archiveListButton.click();
+    }
+
+    public boolean verifyListExist(final String nameList) {
+        By element = By.xpath(String.format("//textarea[@aria-label='%s']", nameList));
+        return webDriverAction.isExistingSelector(element);
+    }
+
+
 }
