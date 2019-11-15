@@ -1,7 +1,9 @@
 package org.fundacionjala.trello.pages.board;
 
 import org.fundacionjala.trello.pages.common.ISteps;
+import org.fundacionjala.trello.pages.team.TeamCreationPage;
 import org.fundacionjala.trello.pages.card.BoardPage;
+import org.fundacionjala.trello.pages.team.TeamPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +19,8 @@ public class DashboardPage {
     private static final String WAY_BOARDS_PAGE = "boards page";
     private static final String WAY_ADD_BUTTON = "add button";
     private static final String WAY_BOARD_BUTTON = "board button";
+    private static final String WAY_TEAM_ROM_HEADER = "Team from header";
+    private static final String WAY_TEAM_FROM_SIDEBAR = "Team from sidebar";
 
     @FindBy(css = "._2BQG4yPMt5s_hu._2hgn5meZL7bJdx._3r1LXvjBp8zfAv._1iYprMLTeGpyW9")
     private WebElement addButton;
@@ -59,6 +63,14 @@ public class DashboardPage {
     private WebElement boardButtonHeader;
     @FindBy(css = "button[data-test-id='header-boards-menu-create-board']")
     private WebElement createNewBoardLeftPanel;
+
+
+    // Team create
+    @FindBy(css = "button[data-test-id='header-create-team-button']")
+    private WebElement createTeamButtonHeader;
+
+    @FindBy(css = "button[data-test-id='home-navigation-create-team-button'] span span")
+    private WebElement createTeamButtonSidebar;
 
     public DashboardPage(final WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -137,5 +149,24 @@ public class DashboardPage {
         WebDriverWait wait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
         wait.until(ExpectedConditions.visibilityOf(backgroundColor));
         return backgroundColor.getAttribute("style");
+    }
+    public TeamCreationPage teamClickAddHeader(final String wayCreateTeams) {
+        HashMap<String, ISteps> waysToCreateTeam = new HashMap<>();
+        waysToCreateTeam.put(WAY_TEAM_ROM_HEADER, this::createTeamFromHeader);
+        waysToCreateTeam.put(WAY_TEAM_FROM_SIDEBAR, this::createTeamFromSidebar);
+        waysToCreateTeam.get(wayCreateTeams).execute();
+        return new TeamCreationPage(webDriver);
+    }
+
+    public TeamPage getTeamPage() {
+        return new TeamPage(webDriver);
+    }
+
+    public void createTeamFromHeader() {
+        addButtonHeader.click();
+        createTeamButtonHeader.click();
+    }
+    public void createTeamFromSidebar() {
+        createTeamButtonSidebar.click();
     }
 }
