@@ -114,4 +114,14 @@ public class CardSteps {
     public void iModifyCardWithTheFollowingData(final String cardName, final Map<String, String> data) {
         boardPage.updteDataFromForm(cardName, data.get("Name"), data.get("Description"), data.get("Comment"));
     }
+
+    @And("I close the card form")
+    public void iCloseTheCardForm() {
+        boardPage.closeDataForm();
+    }
+
+    @And("I delete the board created")
+    public void iDeleteTheBoardCreated() {
+        dashboardPage.deleteCurrentBoard();
+    }
 }

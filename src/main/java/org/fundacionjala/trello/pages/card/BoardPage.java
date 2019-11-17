@@ -269,6 +269,9 @@ public class BoardPage {
         txtComment.click();
         txtComment.sendKeys(comment);
         btnSaveComment.click();
+    }
+
+    public void closeDataForm(){
         btnCloseCardForm.click();
     }
 }

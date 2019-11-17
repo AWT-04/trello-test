@@ -14,6 +14,8 @@ Feature: List feature
     Then I should see the list "To Do" in the board
     And I select the card "Selenium tasks"
     And I should see "To Do" in list after selecting card
+    And I close the card form
+    And I delete the board created
 
   Scenario: Verify archive a list in a board
     When I add a list with the name:
@@ -22,3 +24,4 @@ Feature: List feature
       | Name | To Do |
     Then I don't should see the list:
       | Name | To Do |
+    And I delete the board created

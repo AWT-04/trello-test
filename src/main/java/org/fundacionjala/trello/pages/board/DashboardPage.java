@@ -89,6 +89,15 @@ public class DashboardPage {
         closeButton.click();
     }
 
+    public void deleteCurrentBoard() {
+        moreOptions.click();
+        closeBoard.click();
+        closeButton.click();
+        deleteBoard.click();
+        closeButton.click();
+        webDriver.quit();
+    }
+
     public BoardCreationPage clickAddBoard(final String wayCreateProject) {
         HashMap<String, ISteps> waysToCreateBoard = new HashMap<>();
         waysToCreateBoard.put(WAY_BOARDS_PAGE, this::createBoardByCentralButton);
