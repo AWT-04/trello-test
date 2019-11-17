@@ -122,6 +122,6 @@ public class CardSteps {
 
     @And("I delete the board created")
     public void iDeleteTheBoardCreated() {
-        dashboardPage.deleteCurrentBoard();
+        boardPage.deleteCurrentBoard();
     }
 }

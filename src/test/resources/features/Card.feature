@@ -1,5 +1,5 @@
 Feature: Card feature
-  As owner, I want add, delete and update a card, so that I can verify the UI board
+  As owner, I want to add, delete and update a card, so that I can verify the UI board
 
   Background:
     Given I log in with the user "owner"

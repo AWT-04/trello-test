@@ -127,6 +127,21 @@ public class BoardPage {
     @FindBy(xpath = "//a[@class='icon-md icon-close dialog-close-button js-close-window']")
     private WebElement btnCloseCardForm;
 
+    @FindBy(css = ".js-open-more")
+    private WebElement moreOptions;
+
+    @FindBy(css = ".js-close-board")
+    private WebElement closeBoard;
+
+    @FindBy(css = ".negate")
+    private WebElement closeButton;
+
+    @FindBy(css = ".js-delete")
+    private WebElement deleteBoard;
+
+    @FindBy(css = ".js-confirm")
+    private WebElement confirmDeleteBoard;
+
     public void createList(final String nameList) {
         txtNameList.sendKeys(nameList);
         btnAddList.click();
@@ -273,5 +288,13 @@ public class BoardPage {
 
     public void closeDataForm(){
         btnCloseCardForm.click();
+    }
+
+    public void deleteCurrentBoard() {
+        moreOptions.click();
+        closeBoard.click();
+        closeButton.click();
+        deleteBoard.click();
+        confirmDeleteBoard.click();
     }
 }
