@@ -34,11 +34,24 @@ import java.util.Map;
             teamPage = dashboardPage.getTeamPage();
             Assert.assertEquals(teamPage.getNameTeam(), teamName);
             Assert.assertEquals(teamPage.getDescriptionTeam(), teamDesc);
-            teamPage.dashboardHeaderButton();
+            Assert.assertTrue(teamPage.teamNameTitle().contains(teamName));
         }
 
         @And("Team {string} is listed in sidebar on dashboard page")
-        public void teamIsListedInBoardsPage(final String teamNameEx) {
+        public void teamIsListedInBoardsPage(final String teamName) {
+            Assert.assertNotNull(dashboardPage.getTeamNameSidebar(teamName));
+        }
+
+        @And("Team {string} is listed in content on dashboard page")
+        public void teamIsListedInContentOnDashboardPage(String teamName) {
+            Assert.assertNotNull(dashboardPage.getTeamNameDashboard(teamName));
+        }
+
+        @And("Team {string} is listed on url and page title")
+        public void teamIsListedOnUrlAndPageTitle(String teamName) {
             teamPage = dashboardPage.getTeamPage();
+            Assert.assertTrue(teamPage.teamNameTitle().contains(teamName));
+            Assert.assertTrue(teamPage.teamNameUrl().contains(teamName.toLowerCase()));
+            teamPage.dashboardHeaderButton();
         }
     }

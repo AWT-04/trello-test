@@ -9,11 +9,15 @@ Feature: Team feature
       | name        | Test1              |
       | description | description test 1 |
     Then Team "Test1" is listed in the team page with "description test 1" as description
+    And Team "Test1" is listed on url and page title
     And Team "Test1" is listed in sidebar on dashboard page
+    And Team "Test1" is listed in content on dashboard page
 
   Scenario: Create new team from sidebar
     When I create a new "Team from sidebar" with :
       | name        | Test2              |
       | description | description test 2 |
     Then Team "Test2" is listed in the team page with "description test 2" as description
-#    And Team "Test1" is listed in boards page
+    And Team "Test2" is listed on url and page title
+    And Team "Test2" is listed in sidebar on dashboard page
+    And Team "Test2" is listed in content on dashboard page

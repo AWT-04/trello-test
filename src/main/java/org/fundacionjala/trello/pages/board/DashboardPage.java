@@ -4,6 +4,7 @@ import org.fundacionjala.trello.pages.common.ISteps;
 import org.fundacionjala.trello.pages.team.TeamCreationPage;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.fundacionjala.trello.pages.team.TeamPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -66,6 +67,9 @@ public class DashboardPage {
 
 
     // Team create
+//    @FindBy(css = "h3[class='boards-page-board-section-header-name']")
+//    private WebElement teamTitleInDashboard;
+
     @FindBy(css = "button[data-test-id='header-create-team-button']")
     private WebElement createTeamButtonHeader;
 
@@ -156,6 +160,20 @@ public class DashboardPage {
         waysToCreateTeam.put(WAY_TEAM_FROM_SIDEBAR, this::createTeamFromSidebar);
         waysToCreateTeam.get(wayCreateTeams).execute();
         return new TeamCreationPage(webDriver);
+    }
+
+    public String getTeamNameDashboard(String teamNameToVerify) {
+        String node = String.format("//h3[@class='boards-page-board-section-header-name' "
+                + "and contains(text(),'%s')]", teamNameToVerify);
+        WebElement teamTitleInDashboard =  webDriver.findElement(By.xpath(node));
+        return teamTitleInDashboard.getText();
+    }
+
+    public String getTeamNameSidebar(String teamNameToVerify) {
+        String node = String.format("//span[@data-test-id='home-team-tab-name' "
+                + "and contains(text(),'%s')]", teamNameToVerify);
+        WebElement teamTitleInDashboard =  webDriver.findElement(By.xpath(node));
+        return teamTitleInDashboard.getText();
     }
 
     public TeamPage getTeamPage() {

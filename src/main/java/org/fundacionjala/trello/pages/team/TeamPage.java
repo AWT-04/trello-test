@@ -52,4 +52,11 @@ public class TeamPage {
     public void teamNameSidebar() {
         teamNameSidebar.getText();
     }
+
+    public String teamNameTitle() {
+        return webDriver.getTitle();
+    }
+    public String teamNameUrl() {
+        return webDriver.getCurrentUrl();
+    }
 }
