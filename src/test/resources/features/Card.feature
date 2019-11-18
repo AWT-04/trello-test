@@ -7,7 +7,7 @@ Feature: Card feature
       | Title | My board |
     And I add a list with the name:
       | Name | To Do |
-
+  @createBoard @deleteBoard
   Scenario: Verify the cards creation in list
     When I create the following card:
       | Name | Selenium tasks |
