@@ -54,4 +54,9 @@ import java.util.Map;
             Assert.assertTrue(teamPage.teamNameUrl().contains(teamName.toLowerCase()));
             teamPage.dashboardHeaderButton();
         }
+
+        @And("Team {string} listed on search button on header")
+        public void teamListedOnSearchButtonOnHeader(String teamName) {
+            dashboardPage.searchTeamButtonHeader(teamName);
+        }
     }

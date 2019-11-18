@@ -12,6 +12,7 @@ Feature: Team feature
     And Team "Test1" is listed on url and page title
     And Team "Test1" is listed in sidebar on dashboard page
     And Team "Test1" is listed in content on dashboard page
+    And Team "Test1" listed on search button on header
 
   Scenario: Create new team from sidebar
     When I create a new "Team from sidebar" with :
@@ -21,3 +22,4 @@ Feature: Team feature
     And Team "Test2" is listed on url and page title
     And Team "Test2" is listed in sidebar on dashboard page
     And Team "Test2" is listed in content on dashboard page
+    And Team "Test2" listed on search button on header

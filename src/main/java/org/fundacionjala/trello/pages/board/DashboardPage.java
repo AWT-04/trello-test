@@ -67,8 +67,8 @@ public class DashboardPage {
 
 
     // Team create
-//    @FindBy(css = "h3[class='boards-page-board-section-header-name']")
-//    private WebElement teamTitleInDashboard;
+    @FindBy(css = "input[data-test-id='header-search-input']")
+    private WebElement teamSearchInDashboardInput;
 
     @FindBy(css = "button[data-test-id='header-create-team-button']")
     private WebElement createTeamButtonHeader;
@@ -172,8 +172,8 @@ public class DashboardPage {
     public String getTeamNameSidebar(String teamNameToVerify) {
         String node = String.format("//span[@data-test-id='home-team-tab-name' "
                 + "and contains(text(),'%s')]", teamNameToVerify);
-        WebElement teamTitleInDashboard =  webDriver.findElement(By.xpath(node));
-        return teamTitleInDashboard.getText();
+        WebElement teamTitleInSidebar =  webDriver.findElement(By.xpath(node));
+        return teamTitleInSidebar.getText();
     }
 
     public TeamPage getTeamPage() {
@@ -184,6 +184,15 @@ public class DashboardPage {
         addButtonHeader.click();
         createTeamButtonHeader.click();
     }
+
+    public String searchTeamButtonHeader(String teamNameToVerify) {
+        teamSearchInDashboardInput.click();
+        teamSearchInDashboardInput.sendKeys(teamNameToVerify);
+        String node = String.format("//a[contains(text(),'%s')]", teamNameToVerify);
+        WebElement teamTitleInDashboard =  webDriver.findElement(By.xpath(node));
+        return teamTitleInDashboard.getText();
+    }
+
     public void createTeamFromSidebar() {
         createTeamButtonSidebar.click();
     }
