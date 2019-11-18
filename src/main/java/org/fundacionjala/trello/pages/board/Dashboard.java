@@ -2,6 +2,7 @@ package org.fundacionjala.trello.pages.board;
 
 import org.fundacionjala.core.utils.AbstractPage;
 import org.fundacionjala.trello.pages.common.ISteps;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -59,7 +60,7 @@ public class Dashboard extends AbstractPage {
     private WebElement titleHeader;
 
     public String getTitleStringHeader() {
-        webDriverAction.waitVisibility(titleHeader);
+        webDriverAction.waitVisibility(By.cssSelector("span[class='js-board-editing-target board-header-btn-text']"));
         return titleHeader.getText();
     }
 
@@ -73,10 +74,12 @@ public class Dashboard extends AbstractPage {
 
     @FindBy(css = "span[class='board-menu-navigation-item-link-icon js-fill-background-preview']")
     private WebElement backgroundColor;
+    @FindBy(css = "a[class='board-menu-header-back-button icon-lg icon-back js-pop-widget-view']")
+    private WebElement goBackButton;
 
     public String getBackgroundColor() {
-        webDriverAction.waitVisibility(backgroundColor);
+        webDriverAction.waitVisibility(By.cssSelector(
+                "span[class='board-menu-navigation-item-link-icon js-fill-background-preview']"));
         return backgroundColor.getAttribute("style");
     }
-
 }

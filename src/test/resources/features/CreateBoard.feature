@@ -8,7 +8,7 @@ Feature: Create new board in Trello
     When I create new board from "boards page" with a:
       | Title      | Fernando |
       | Background | green    |
-      | Privacy    | public   |
+      | Privacy    | private  |
     Then I should see the board
 
   Scenario: Create new board with add button
