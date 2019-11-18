@@ -23,14 +23,11 @@ public class Hooks {
         System.out.println("uri =  " + configVariableHandler.getUri().get("uri"));
         System.out.println(" token =  " + configVariableHandler.getApiToken("owner").get("apiToken"));
         System.out.println(" api =  " + configVariableHandler.getKeyToken("owner").get("keyToken"));
-        HashMap<String, String> body = new HashMap<String, String>();
+        Map<String, String> body = new HashMap<String, String>();
         body.put("name", name);
         Response response = RequestManager.post(Authentication.getRequestSpecification("owner"),
                 "https://api.trello.com/1/boards", body);
-        System.out.println(response.prettyPrint());
-        boardId = response.jsonPath().getString("id");
-
-        System.out.println("Board created succesfully...");
+        System.out.println("Board created succesfully..." + body);
     }
 
     @After ("@deleteBoard")
