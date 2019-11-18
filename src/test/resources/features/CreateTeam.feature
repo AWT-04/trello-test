@@ -4,6 +4,7 @@ Feature: Team feature
   Background:
     Given I log in with the user "owner"
 
+  @clean @cleanTeams
   Scenario: Create new team from header
     When I create a new "Team from header" with :
       | name        | Test1              |

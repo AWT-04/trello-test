@@ -21,9 +21,27 @@ public class ConfigVariableHandler {
         return configVariablesMap;
     }
 
+    public HashMap getApiToken(String account){
+        String apiToken = Environment.getInstance().getValue(String.format("credentials.%s.apiToken", account));
+        this.configVariablesMap.put("apiToken", apiToken);
+        return configVariablesMap;
+    }
+
+    public HashMap getKeyToken(String account){
+        String keyToken = Environment.getInstance().getValue(String.format("credentials.%s.keyToken", account));
+        this.configVariablesMap.put("keyToken", keyToken);
+        return configVariablesMap;
+    }
+
     public HashMap getUrl() {
         String urlConfig = Environment.getInstance().getValue(String.format("url.%s", "trello"));
         this.configVariablesMap.put("url", urlConfig);
+        return configVariablesMap;
+    }
+
+    public HashMap getUri() {
+        String urlConfig = Environment.getInstance().getValue(String.format("url.%s", "trelloApiUri"));
+        this.configVariablesMap.put("uri", urlConfig);
         return configVariablesMap;
     }
 }
