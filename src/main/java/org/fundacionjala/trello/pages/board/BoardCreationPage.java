@@ -1,26 +1,23 @@
 package org.fundacionjala.trello.pages.board;
 
+import org.fundacionjala.core.utils.AbstractPage;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.fundacionjala.trello.pages.common.ISteps;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BoardCreationPage {
-    private WebDriver webDriver;
+public class BoardCreationPage extends AbstractPage {
+
     private String titleString;
     private String privacyString;
     private String backgroundString;
-    private static final int PRIVATE_OUT_IN_SECONDS = 60;
     private static final Map<String, String> BACKGROUNDCOLORS;
 
     static {
@@ -44,11 +41,6 @@ public class BoardCreationPage {
     @FindBy(css = "input[class='js-confirm full primary']")
     private WebElement confirmPublicButton;
 
-    public BoardCreationPage(final WebDriver webDriver) {
-        this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);
-    }
-
     public String getTitleString() {
         return titleString;
     }
@@ -63,7 +55,6 @@ public class BoardCreationPage {
     }
 
     public BoardPage createNewBoard(final Map<BoardFields, String> inputData) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
         EnumMap<BoardFields, ISteps> enumMap = new EnumMap<>(BoardFields.class);
         titleString = inputData.get(BoardFields.TITLE);
         webDriverWait.until(ExpectedConditions.visibilityOf(addBoardTitle));
@@ -75,7 +66,7 @@ public class BoardCreationPage {
             enumMap.get(key).execute();
         }
         createBoardButton.click();
-        return new BoardPage(webDriver);
+        return new BoardPage();
     }
 
     public void selectBackground(final Map<BoardFields, String> inputData) {
@@ -87,7 +78,6 @@ public class BoardCreationPage {
     }
 
     public void selectPrivacy(final Map<BoardFields, String> inputData) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, PRIVATE_OUT_IN_SECONDS);
         privacyString = inputData.get(BoardFields.PRIVACY);
         if (privacyString.equals("public")) {
             webDriverWait.until(ExpectedConditions.visibilityOf(selectPrivacyButton));
