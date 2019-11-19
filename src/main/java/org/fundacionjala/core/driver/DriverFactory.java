@@ -5,7 +5,6 @@ import org.fundacionjala.core.browser.Chrome;
 import org.fundacionjala.core.browser.ChromeHeadless;
 import org.openqa.selenium.WebDriver;
 
-import java.net.MalformedURLException;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -21,7 +20,7 @@ public final class DriverFactory {
         BROWSERS.put(DriverType.CHROME_HEADLESS, ChromeHeadless::new);
     }
 
-    public static WebDriver getDriverManager(final DriverType driverType) throws MalformedURLException {
+    public static WebDriver getDriverManager(final DriverType driverType) {
         return BROWSERS.getOrDefault(driverType, ChromeHeadless::new).get().getBrowser();
     }
 }
