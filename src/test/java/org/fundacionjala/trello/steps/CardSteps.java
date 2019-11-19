@@ -4,7 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.core.driver.DriverManager;
+import org.fundacionjala.api.ScenarioContext;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.testng.Assert;
 
@@ -12,11 +12,12 @@ import java.util.Map;
 
 public class CardSteps {
     private BoardPage boardPage;
+    private ScenarioContext context;
 
-    public CardSteps(final BoardPage boardPage) {
+    public CardSteps(final BoardPage boardPage, ScenarioContext context) {
         this.boardPage = boardPage;
+        this.context = context;
     }
-
 
     @Then("I should see {string} in the list of cards")
     public void iShouldSeeInTheListOfCards(final String cardName) {
@@ -115,6 +116,7 @@ public class CardSteps {
 
     @Given("I navigate to created board")
     public void iNavigateToCreatedBoard() {
-        boardPage.selectCreatedBoard(Hooks.name);
+
+        boardPage.selectCreatedBoard(context.getContext("board").jsonPath().get("name"));
     }
 }

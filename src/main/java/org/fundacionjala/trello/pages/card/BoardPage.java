@@ -16,6 +16,9 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".list-name-input")
     private WebElement txtNameList;
 
+    @FindBy(xpath = "//span[@class='placeholder']")
+    private WebElement btnAddTextList;
+
     @FindBy(css = ".mod-list-add-button.js-save-edit")
     private WebElement btnAddList;
 
@@ -132,6 +135,7 @@ public class BoardPage extends AbstractPage {
 
 
     public void createList(final String nameList) {
+        btnAddTextList.click();
         webDriverAction.waitVisibility(txtNameList);
         txtNameList.sendKeys(nameList);
         btnAddList.click();

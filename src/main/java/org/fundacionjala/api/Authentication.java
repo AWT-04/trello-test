@@ -3,10 +3,6 @@ package org.fundacionjala.api;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.fundacionjala.core.utils.ConfigVariableHandler;
-import org.fundacionjala.core.utils.Environment;
-
-import java.util.HashMap;
-
 
 /**
  * This classes permit the authentication, using a singleton pattern.
@@ -28,8 +24,8 @@ public final class Authentication {
 
         RequestSpecification requestSpecification = new RequestSpecBuilder()
                 .setBaseUri((String) configVariableHandler.getUri().get("uri"))
-                .addQueryParam("key", configVariableHandler.getKeyToken(account).get("keyToken").toString())
-                .addQueryParam("token", configVariableHandler.getApiToken(account).get("apiToken").toString())
+                .addQueryParam("key", configVariableHandler.getKeyToken(account).get("keyToken"))
+                .addQueryParam("token", configVariableHandler.getApiToken(account).get("apiToken"))
                 .build();
         return requestSpecification.log().all();
     }

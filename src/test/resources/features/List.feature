@@ -3,9 +3,9 @@ Feature: List feature
 
   Background:
     Given I log in with the user "owner"
-    And a board created with the name:
-      | Title | My board |
+    And I navigate to created board
 
+  @createBoard @deleteBoard
   Scenario: Verify the list creation in a board
     When I add a list with the name:
       | Name | To Do |
@@ -14,14 +14,13 @@ Feature: List feature
     Then I should see the list "To Do" in the board
     And I select the card "Selenium tasks"
     And I should see "To Do" in list after selecting card
-    And I close the card form
-    And I delete the board created
 
+  @createBoard @deleteBoard
   Scenario: Verify archive a list in a board
     When I add a list with the name:
-      | Name | To Do |
+      | Name | Task |
     And I archive the list:
-      | Name | To Do |
+      | Name | Task |
     Then I don't should see the list:
-      | Name | To Do |
+      | Name | Task |
     And I delete the board created
