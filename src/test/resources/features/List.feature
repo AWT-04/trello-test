@@ -18,9 +18,9 @@ Feature: List feature
   @createBoard @deleteBoard
   Scenario: Verify archive a list in a board
     When I add a list with the name:
-      | Name | Task |
+      | Name | To Do |
     And I archive the list:
-      | Name | Task |
+      | Name | To Do |
     Then I don't should see the list:
-      | Name | Task |
+      | Name | To Do |
     And I delete the board created

@@ -9,8 +9,6 @@ import org.fundacionjala.core.utils.ConfigVariableHandler;
  */
 public final class Authentication {
 
-    private static final String TOKEN_HEADER = "x-trackerToken";
-
     private Authentication() {    }
 
     /**

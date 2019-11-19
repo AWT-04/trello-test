@@ -133,13 +133,12 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".js-confirm")
     private WebElement confirmDeleteBoard;
 
-
     public void createList(final String nameList) {
-        btnAddTextList.click();
+        webDriverAction.click(btnAddTextList);
         webDriverAction.waitVisibility(txtNameList);
-        txtNameList.sendKeys(nameList);
-        btnAddList.click();
-        btnExitCard.click();
+        webDriverAction.setValue(txtNameList, nameList);
+        webDriverAction.click(btnAddList);
+        webDriverAction.click(btnExitCard);
     }
 
     public void createCard(final String nameCard) {
@@ -210,47 +209,10 @@ public class BoardPage extends AbstractPage {
         return node.getText().contains(nameCard);
     }
 
-    public void editList(final String name) {
-        listEdit.click();
-        listEditText.clear();
-        listEditText.sendKeys(name);
-        buttonAddList.click();
-    }
-
-    public void addList(final String name) {
-        listName.sendKeys(name);
-        buttonAddList.click();
-    }
-
-    public void addSeveralList(final List<String> lists) {
-        for (String list : lists) {
-            addList(list);
-        }
-    }
-
     public String getTitleList(final String listName) {
         String listXpath = String.format("//*[text()='%s' and contains(@class,'js-list-name-input')]", listName);
         By listSelectorName = By.xpath(listXpath);
         return headerList.findElement(listSelectorName).getText();
-    }
-
-    public int getSizeList() {
-        return lists.findElements(By.cssSelector("div.js-list.list-wrapper")).size();
-    }
-
-    public void changeListToBoard(final String board) {
-        menuList.click();
-        moveList.click();
-        By selectBoard = By.cssSelector("select.js-select-board");
-        Select dropdown = new Select(webDriver.findElement(selectBoard));
-        dropdown.selectByVisibleText(board);
-        WebElement moveButton = webDriver.findElement(By.xpath("//*[@class='primary wide js-commit-position']"));
-        moveButton.click();
-    }
-
-    public void openBoardDrawer(final String boardName) {
-        searchDrawer.sendKeys(boardName);
-        firstFoundFile.click();
     }
 
     public void openMenuList(final String nameList) {
@@ -261,11 +223,6 @@ public class BoardPage extends AbstractPage {
                 nameList, ancestor, descendant)));
         nameListSelected.click();
         archiveListButton.click();
-    }
-
-    public boolean verifyListExist(final String nameList) {
-        By element = By.xpath(String.format("//textarea[@aria-label='%s']", nameList));
-        return webDriverAction.isExistingSelector(element);
     }
 
     public void updteDataFromForm(final String nameCard, final String newCardName,
