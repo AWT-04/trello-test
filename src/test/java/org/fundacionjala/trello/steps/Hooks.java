@@ -11,23 +11,38 @@ import java.util.List;
 
 public class Hooks {
 
+    @After("@cleanTeams")
+    public void iSendDeleteAllTeamsByPrefixBefore() {
+        ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
+        final String prefix = "test";
+        Response response = RequestManager.get(Authentication.getRequestSpecification("owner"),
+                "/members/me/organizations?fields=all)");
+        List<Integer> allID = response.jsonPath().getList("id");
+        for (int i = 0; i < allID.size(); i++) {
+            String name = RequestManager.get(Authentication.getRequestSpecification("owner"),
+                    "/organizations/" + allID.get(i)).jsonPath().getString("name");
+            System.out.println(name.contains(prefix.toLowerCase()));
+            if (name.contains(prefix.toLowerCase())) {
+                RequestManager.delete(Authentication.getRequestSpecification("owner"),
+                        "/organizations/" + allID.get(i));
+            }
+        }
+    }
+
     @Before("@cleanBoards")
     public void iSendDeleteAllBoardsByPrefixBefore() {
         ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
         final String prefix = " ";
         Response response = RequestManager.get(Authentication.getRequestSpecification("owner"),
-                "/members/me/boards?filter=open)&key=" + configVariableHandler.getKeyToken("owner")
-                        .get("keyToken") + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
+                "/members/me/boards?filter=open)");
         List<String> allName = response.jsonPath().getList("name");
         List<Integer> allID = response.jsonPath().getList("id");
         for (int i = 0; i < allName.size(); i++) {
-            System.out.println(configVariableHandler.getKeyToken("owner").get("keyToken") + ".............key");
-            RequestManager.delete(Authentication.getRequestSpecification("owner"),
-                    "/boards/" + allID.get(i) + "?key=" + configVariableHandler.getKeyToken("owner").get("keyToken")
-                            + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
-            System.out.println(allName.get(i));
+            if (allName.get(i).contains(prefix.toLowerCase())) {
+                RequestManager.delete(Authentication.getRequestSpecification("owner"),
+                        "/boards/" + allID.get(i));
+            }
         }
-
     }
 
     @Before("@cleanCards")
@@ -35,18 +50,15 @@ public class Hooks {
         ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
         final String prefix = " ";
         Response response = RequestManager.get(Authentication.getRequestSpecification("owner"),
-                "/members/me/cards?filter=open)&key=" + configVariableHandler.getKeyToken("owner")
-                        .get("keyToken") + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
+                "/members/me/cards?filter=open)");
         List<String> allName = response.jsonPath().getList("name");
         List<Integer> allID = response.jsonPath().getList("id");
         for (int i = 0; i < allName.size(); i++) {
-            System.out.println(configVariableHandler.getKeyToken("owner").get("keyToken") + ".............key");
-            RequestManager.delete(Authentication.getRequestSpecification("owner"),
-                    "/cards/" + allID.get(i) + "?key=" + configVariableHandler.getKeyToken("owner").get("keyToken")
-                            + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
-            System.out.println(allName.get(i));
+            if (allName.get(i).contains(prefix.toLowerCase())) {
+                RequestManager.delete(Authentication.getRequestSpecification("owner"),
+                        "/cards/" + allID.get(i));
+            }
         }
-
     }
 
     @After("@cleanBoardsAfter")
@@ -59,13 +71,11 @@ public class Hooks {
         List<String> allName = response.jsonPath().getList("name");
         List<Integer> allID = response.jsonPath().getList("id");
         for (int i = 0; i < allName.size(); i++) {
-            System.out.println(configVariableHandler.getKeyToken("owner").get("keyToken") + ".............key");
-            RequestManager.delete(Authentication.getRequestSpecification("owner"),
-                    "/boards/" + allID.get(i) + "?key=" + configVariableHandler.getKeyToken("owner").get("keyToken")
-                            + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
-            System.out.println(allName.get(i));
+            if (allName.get(i).contains(prefix.toLowerCase())) {
+                RequestManager.delete(Authentication.getRequestSpecification("owner"),
+                        "/boards/" + allID.get(i));
+            }
         }
-
     }
 
     @After("@cleanCardsAfter")
@@ -73,17 +83,14 @@ public class Hooks {
         ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
         final String prefix = " ";
         Response response = RequestManager.get(Authentication.getRequestSpecification("owner"),
-                "/members/me/cards?filter=open)&key=" + configVariableHandler.getKeyToken("owner")
-                        .get("keyToken") + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
+                "/members/me/cards?filter=open)");
         List<String> allName = response.jsonPath().getList("name");
         List<Integer> allID = response.jsonPath().getList("id");
         for (int i = 0; i < allName.size(); i++) {
-            System.out.println(configVariableHandler.getKeyToken("owner").get("keyToken") + ".............key");
-            RequestManager.delete(Authentication.getRequestSpecification("owner"),
-                    "/cards/" + allID.get(i) + "?key=" + configVariableHandler.getKeyToken("owner").get("keyToken")
-                            + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
-            System.out.println(allName.get(i));
+            if (allName.get(i).contains(prefix.toLowerCase())) {
+                RequestManager.delete(Authentication.getRequestSpecification("owner"),
+                        "/cards/" + allID.get(i));
+            }
         }
-
     }
 }

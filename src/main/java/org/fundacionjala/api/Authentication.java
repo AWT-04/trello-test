@@ -22,8 +22,9 @@ public final class Authentication {
 
         RequestSpecification requestSpecification = new RequestSpecBuilder()
                 .setBaseUri((String) configVariableHandler.getUri().get("uri"))
+                .addQueryParam("key", configVariableHandler.getKeyToken(account).get("keyToken"))
+                .addQueryParam("token", configVariableHandler.getApiToken(account).get("apiToken"))
                 .build();
         return requestSpecification.log().all();
     }
 }
-

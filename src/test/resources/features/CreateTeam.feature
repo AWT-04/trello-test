@@ -4,7 +4,7 @@ Feature: Team feature
   Background:
     Given I log in with the user "owner"
 
-  @clean @cleanTeams
+  @cleanTeams
   Scenario: Create new team from header
     When I create a new "Team from header" with :
       | name        | Test1              |
@@ -15,6 +15,7 @@ Feature: Team feature
     And Team "Test1" is listed in content on dashboard page
     And Team "Test1" listed on search button on header
 
+  @cleanTeams
   Scenario: Create new team from sidebar
     When I create a new "Team from sidebar" with :
       | name        | Test2              |
