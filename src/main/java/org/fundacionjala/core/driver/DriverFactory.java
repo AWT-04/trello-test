@@ -21,6 +21,6 @@ public final class DriverFactory {
     }
 
     public static WebDriver getDriverManager(final DriverType driverType) {
-        return BROWSERS.getOrDefault(driverType, ChromeHeadless::new).get().getBrowser();
+        return BROWSERS.getOrDefault(driverType, Chrome::new).get().getBrowser();
     }
 }

@@ -19,11 +19,11 @@ public final class DriverManager {
     }
 
     private DriverManager() {
-        String browser = Environment.getInstance().getValue("$['local']['browser']").toUpperCase();
-        this.browser = DriverFactory.getDriverManager(DriverType.valueOf(browser));
-        this.browser.manage().timeouts().implicitlyWait(TIME, TimeUnit.SECONDS);
-        webDriverWait = new WebDriverWait(this.browser, TIME_OUT_IN_SECONDS);
-        this.browser.get("https://trello.com/login");
+        String browserString = Environment.getInstance().getValue("$['local']['browser']").toUpperCase();
+        browser = DriverFactory.getDriverManager(DriverType.valueOf(browserString));
+        browser.manage().timeouts().implicitlyWait(TIME, TimeUnit.SECONDS);
+        webDriverWait = new WebDriverWait(browser, TIME_OUT_IN_SECONDS);
+        browser.get("https://trello.com/login");
     }
 
     public WebDriver getDriver() {
