@@ -7,7 +7,6 @@ import org.fundacionjala.api.Authentication;
 import org.fundacionjala.api.RequestManager;
 import org.fundacionjala.api.ScenarioContext;
 import org.fundacionjala.core.driver.DriverManager;
-import org.fundacionjala.core.utils.ConfigVariableHandler;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,13 +21,11 @@ public class HooksCards {
 
     @Before ("@createBoard")
     public void createBoard() {
-        ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
         Map<String, String> body = new HashMap<String, String>();
         body.put("name", name);
         Response response = RequestManager.trellopost(Authentication.getRequestSpecification("owner"),
                 "https://api.trello.com/1/boards", body);
         context.setContext("board", response);
-        System.out.println("Board created succesfully..." + body);
     }
 
     @After ("@deleteBoard")
@@ -36,7 +33,6 @@ public class HooksCards {
         RequestManager.delete(Authentication.getRequestSpecification("owner"),
                 String.format("https://api.trello.com/1/boards/%s",
                         context.getContext("board").jsonPath().getString("id")));
-        System.out.println("Board deleted sucessfully...");
         DriverManager.getInstance().getDriver().close();
     }
 }
