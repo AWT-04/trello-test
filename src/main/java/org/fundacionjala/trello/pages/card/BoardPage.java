@@ -1,29 +1,17 @@
 package org.fundacionjala.trello.pages.card;
 
-import org.fundacionjala.core.utils.WebDriverAction;
+import org.fundacionjala.core.utils.AbstractPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 
-public class BoardPage {
-    public WebDriver webDriver;
-    protected WebDriverWait webDriverWait;
-    protected WebDriverAction webDriverAction;
+public class BoardPage extends AbstractPage {
+
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
-
-
-    public BoardPage(final WebDriver webDriver) {
-        this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);
-    }
 
     @FindBy(css = ".list-name-input")
     private WebElement txtNameList;
@@ -143,13 +131,16 @@ public class BoardPage {
     private WebElement confirmDeleteBoard;
 
     public void createList(final String nameList) {
+        webDriverAction.waitVisibility(txtNameList);
         txtNameList.sendKeys(nameList);
         btnAddList.click();
         btnExitCard.click();
     }
 
     public void createCard(final String nameCard) {
+        webDriverAction.waitVisibility(btnAddCard);
         btnAddCard.click();
+        webDriverAction.waitVisibility(txtNameCard);
         txtNameCard.sendKeys(nameCard);
         btnAcceptAddCard.click();
         btnCancelAddCard.click();
@@ -162,10 +153,10 @@ public class BoardPage {
 
     public void deleteCard(final String cardName) {
         String node = String.format(xpathCard, cardName);
-         webDriver.findElement(By.xpath(node)).click();
-         btnArchiveCard.click();
-         btnDeleteCard.click();
-         btnConfirmDeleteCard.click();
+        webDriver.findElement(By.xpath(node)).click();
+        btnArchiveCard.click();
+        btnDeleteCard.click();
+        btnConfirmDeleteCard.click();
     }
 
     public List<WebElement> listOfCards(final String cardName) {
@@ -176,7 +167,7 @@ public class BoardPage {
     public void rigthClickSelectCard(final String nameCard) {
         Actions actions = new Actions(webDriver);
         String node = String.format("//span[contains(text(),'%s')]", nameCard);
-        WebElement btnEditR =  webDriver.findElement(By.xpath(node));
+        WebElement btnEditR = webDriver.findElement(By.xpath(node));
         actions.contextClick(btnEditR).perform();
     }
 
@@ -199,7 +190,7 @@ public class BoardPage {
     }
 
     public boolean verifyListSelectedCardNameInTheTitle(final String nameList) {
-        WebElement txtTitleNameSelectedCard =  webDriver.findElement(
+        WebElement txtTitleNameSelectedCard = webDriver.findElement(
                 By.xpath(String.format("//*[@class='js-open-move-from-header' and contains(text(),'%s')]", nameList)));
         return txtTitleNameSelectedCard.getText().contains(nameList);
     }
@@ -211,7 +202,7 @@ public class BoardPage {
     public boolean verifyCardNameInTheMenuActivity(final String nameCard) {
         WebElement node = webDriver.findElement(By.xpath(String.format(
                 "//a[contains(text(),'%s')]", nameCard)));
-        return  node.getText().contains(nameCard);
+        return node.getText().contains(nameCard);
     }
 
     public void editList(final String name) {
