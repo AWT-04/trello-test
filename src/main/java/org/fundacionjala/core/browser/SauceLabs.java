@@ -2,8 +2,6 @@ package org.fundacionjala.core.browser;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static org.fundacionjala.core.browser.RemoteConnection.ENVIRONMENT;
-
 /**
  * This class allows to establish the connection in the remote browser through SauceLabs.
  */
