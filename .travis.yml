@@ -1,12 +1,12 @@
 sudo: required
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 before_script:
-  - wget https://services.gradle.org/distributions/gradle-6.0-bin.zip
-  - unzip gradle-6.0-bin.zip
-  - export GRADLE_HOME=$PWD/gradle-6.0
-  - export PATH=$GRADLE_HOME/bin:$PATH
+- wget https://services.gradle.org/distributions/gradle-6.0-bin.zip
+- unzip gradle-6.0-bin.zip
+- export GRADLE_HOME=$PWD/gradle-6.0
+- export PATH=$GRADLE_HOME/bin:$PATH
 addons:
   chrome: stable
   sonarcloud:
@@ -14,14 +14,14 @@ addons:
     token:
       secure: "$SONAR_TOKEN"
 script:
-  - gradle compileJava compileTestJava
-  - sonar-scanner
-  - gradle check
-  - gradle runFeatures
+- gradle compileJava compileTestJava
+- sonar-scanner
+- gradle check
+- gradle runFeatures
 notifications:
   email: true
 before_install:
-  - openssl aes-256-cbc -K $encrypted_4bfe49639030_key -iv $encrypted_4bfe49639030_iv
-    -in configJson/config.json.enc -out configJson/config.json -d
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
-    &
+- openssl aes-256-cbc -K $encrypted_6ec0ac496b5d_key -iv $encrypted_6ec0ac496b5d_iv
+  -in configJson/config.json.enc -out configJson/config.json -d
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
+  &
