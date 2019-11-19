@@ -34,14 +34,9 @@ public class Login extends AbstractPage {
     }
 
     public Dashboard login(final String username, final String password) {
-        if (webDriverAction.isExistingSelector(By.cssSelector(String.format(CSS_PROFILE, username)))) {
-            new Navigator().goToPersonalPage(username);
-        } else {
             webDriver.get("https://trello.com/login");
             this.setUserName(username);
             this.setPassword(password);
             return this.clickLoginButton();
-        }
-        return new Dashboard();
     }
 }

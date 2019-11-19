@@ -14,7 +14,6 @@ Feature: Card feature
     And I select the card "Selenium tasks"
     And I should see "Selenium tasks" in the title after selecting card
     And I should see "Selenium tasks" in the page title
-    And I close the card form
 
   @createBoard @deleteBoard
   Scenario: Update card name in board from the card form
