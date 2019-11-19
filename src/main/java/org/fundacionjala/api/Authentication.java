@@ -3,10 +3,6 @@ package org.fundacionjala.api;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.fundacionjala.core.utils.ConfigVariableHandler;
-import org.fundacionjala.core.utils.Environment;
-
-import java.util.HashMap;
-
 
 /**
  * This classes permit the authentication, using a singleton pattern.

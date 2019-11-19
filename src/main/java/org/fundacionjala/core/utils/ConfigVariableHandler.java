@@ -21,13 +21,13 @@ public class ConfigVariableHandler {
         return configVariablesMap;
     }
 
-    public HashMap getApiToken(String account){
+    public HashMap getApiToken(final String account) {
         String apiToken = Environment.getInstance().getValue(String.format("credentials.%s.apiToken", account));
         this.configVariablesMap.put("apiToken", apiToken);
         return configVariablesMap;
     }
 
-    public HashMap getKeyToken(String account){
+    public HashMap getKeyToken(final String account) {
         String keyToken = Environment.getInstance().getValue(String.format("credentials.%s.keyToken", account));
         this.configVariablesMap.put("keyToken", keyToken);
         return configVariablesMap;

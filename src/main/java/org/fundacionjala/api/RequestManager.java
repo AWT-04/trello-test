@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestManager {
+public final class RequestManager {
     private RequestManager() { }
     /**
      * Sets get method path.

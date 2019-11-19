@@ -43,12 +43,12 @@ import java.util.Map;
         }
 
         @And("Team {string} is listed in content on dashboard page")
-        public void teamIsListedInContentOnDashboardPage(String teamName) {
+        public void teamIsListedInContentOnDashboardPage(final String teamName) {
             Assert.assertNotNull(dashboardPage.getTeamNameDashboard(teamName));
         }
 
         @And("Team {string} is listed on url and page title")
-        public void teamIsListedOnUrlAndPageTitle(String teamName) {
+        public void teamIsListedOnUrlAndPageTitle(final String teamName) {
             teamPage = dashboardPage.getTeamPage();
             Assert.assertTrue(teamPage.teamNameTitle().contains(teamName));
             Assert.assertTrue(teamPage.teamNameUrl().contains(teamName.toLowerCase()));
@@ -56,7 +56,7 @@ import java.util.Map;
         }
 
         @And("Team {string} listed on search button on header")
-        public void teamListedOnSearchButtonOnHeader(String teamName) {
+        public void teamListedOnSearchButtonOnHeader(final String teamName) {
             dashboardPage.searchTeamButtonHeader(teamName);
         }
     }

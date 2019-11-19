@@ -162,14 +162,14 @@ public class DashboardPage {
         return new TeamCreationPage(webDriver);
     }
 
-    public String getTeamNameDashboard(String teamNameToVerify) {
+    public String getTeamNameDashboard(final String teamNameToVerify) {
         String node = String.format("//h3[@class='boards-page-board-section-header-name' "
                 + "and contains(text(),'%s')]", teamNameToVerify);
         WebElement teamTitleInDashboard =  webDriver.findElement(By.xpath(node));
         return teamTitleInDashboard.getText();
     }
 
-    public String getTeamNameSidebar(String teamNameToVerify) {
+    public String getTeamNameSidebar(final String teamNameToVerify) {
         String node = String.format("//span[@data-test-id='home-team-tab-name' "
                 + "and contains(text(),'%s')]", teamNameToVerify);
         WebElement teamTitleInSidebar =  webDriver.findElement(By.xpath(node));
@@ -185,7 +185,7 @@ public class DashboardPage {
         createTeamButtonHeader.click();
     }
 
-    public String searchTeamButtonHeader(String teamNameToVerify) {
+    public String searchTeamButtonHeader(final String teamNameToVerify) {
         teamSearchInDashboardInput.click();
         teamSearchInDashboardInput.sendKeys(teamNameToVerify);
         String node = String.format("//a[contains(text(),'%s')]", teamNameToVerify);
