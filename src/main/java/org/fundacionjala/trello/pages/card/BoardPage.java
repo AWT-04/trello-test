@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class BoardPage {
-    private WebDriver webDriver;
+    public WebDriver webDriver;
     protected WebDriverWait webDriverWait;
     protected WebDriverAction webDriverAction;
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";

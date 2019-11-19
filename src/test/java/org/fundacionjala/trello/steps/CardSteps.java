@@ -124,4 +124,9 @@ public class CardSteps {
     public void iDeleteTheBoardCreated() {
         boardPage.deleteCurrentBoard();
     }
+
+    @Given("I navigate to created board")
+    public void iNavigateToCreatedBoard() {
+        boardPage.webDriver.get(Hooks.URLBOARD);
+    }
 }

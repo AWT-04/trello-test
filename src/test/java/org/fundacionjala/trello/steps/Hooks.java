@@ -14,19 +14,19 @@ import java.util.Map;
 
 public class Hooks {
     RequestManager requestManager;
-    String name = LocalTime.now().toString();
+    String name = "AWT-" + LocalTime.now().toString();
     String boardId;
+    public static String URLBOARD = "";
 
     @Before ("@createBoard")
     public void createBoard(){
         ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
-        System.out.println("uri =  " + configVariableHandler.getUri().get("uri"));
-        System.out.println(" token =  " + configVariableHandler.getApiToken("owner").get("apiToken"));
-        System.out.println(" api =  " + configVariableHandler.getKeyToken("owner").get("keyToken"));
         Map<String, String> body = new HashMap<String, String>();
         body.put("name", name);
-        Response response = RequestManager.post(Authentication.getRequestSpecification("owner"),
+        Response response = RequestManager.Trellopost(Authentication.getRequestSpecification("owner"),
                 "https://api.trello.com/1/boards", body);
+        boardId = response.jsonPath().getString("id");
+        URLBOARD = response.jsonPath().getString("shortUrl");
         System.out.println("Board created succesfully..." + body);
     }
 
