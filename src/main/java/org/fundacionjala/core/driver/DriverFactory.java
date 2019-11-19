@@ -1,6 +1,7 @@
 package org.fundacionjala.core.driver;
 
 import org.fundacionjala.core.browser.Browser;
+import org.fundacionjala.core.browser.BrowserStack;
 import org.fundacionjala.core.browser.Chrome;
 import org.fundacionjala.core.browser.ChromeHeadless;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ public final class DriverFactory {
     static {
         BROWSERS.put(DriverType.CHROME, Chrome::new);
         BROWSERS.put(DriverType.CHROME_HEADLESS, ChromeHeadless::new);
+        BROWSERS.put(DriverType.BROWSER_STACK, BrowserStack::new);
     }
 
     public static WebDriver getDriverManager(final DriverType driverType) {
