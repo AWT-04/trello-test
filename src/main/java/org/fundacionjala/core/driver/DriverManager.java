@@ -4,28 +4,30 @@ import org.fundacionjala.core.utils.Environment;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public final class DriverManager {
 
-    private WebDriver webDriver;
+    private WebDriver browser;
     private WebDriverWait webDriverWait;
-    private static final int TIME_OUT_IN_SECONDS = 15;
-    private static DriverManager ourInstance;
+    private static final int TIME_OUT_IN_SECONDS = 30;
+    private static final int TIME = 15;
+    private static DriverManager ourInstance = new DriverManager();
 
     public static DriverManager getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new DriverManager();
-        }
         return ourInstance;
     }
 
     private DriverManager() {
-        String browser = Environment.getInstance().getValue("$['local']['browser']").toUpperCase();
-        webDriverWait = new WebDriverWait(webDriver, TIME_OUT_IN_SECONDS);
-        webDriver.get("https://trello.com/login");
+        String browserString = Environment.getInstance().getValue("$['local']['browser']").toUpperCase();
+        browser = DriverFactory.getDriverManager(DriverType.valueOf(browserString));
+        browser.manage().timeouts().implicitlyWait(TIME, TimeUnit.SECONDS);
+        webDriverWait = new WebDriverWait(browser, TIME_OUT_IN_SECONDS);
+        browser.get("https://trello.com/login");
     }
 
     public WebDriver getDriver() {
-        return webDriver;
+        return browser;
     }
 
     public WebDriverWait getWait() {

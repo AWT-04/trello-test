@@ -34,7 +34,7 @@ public class TeamPage {
 
     public BoardPage validateTeamValues() {
 
-        return new BoardPage(webDriver);
+        return new BoardPage();
     }
 
     public String getNameTeam() {

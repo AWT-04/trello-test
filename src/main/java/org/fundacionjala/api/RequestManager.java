@@ -3,7 +3,6 @@ package org.fundacionjala.api;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -53,6 +52,18 @@ public final class RequestManager {
         Response response = given()
                 .spec(requestSpec)
                 .params(json)
+                .when()
+                .post(path);
+        response.then().log().all();
+        return response;
+    }
+
+    public static Response trellopost(final RequestSpecification requestSpec, final String path,
+                                      final Map<String, String> json) {
+        Response response = given()
+                .spec(requestSpec)
+                .contentType(ContentType.JSON)
+                .queryParams(json)
                 .when()
                 .post(path);
         response.then().log().all();

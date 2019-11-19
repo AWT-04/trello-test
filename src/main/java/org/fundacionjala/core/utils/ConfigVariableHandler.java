@@ -8,7 +8,7 @@ import java.util.Map;
  * trello-tests.
  */
 public class ConfigVariableHandler {
-    private HashMap<String, String> configVariablesMap;
+    private Map<String, String> configVariablesMap;
 
     public ConfigVariableHandler() {
         configVariablesMap = new HashMap<>();

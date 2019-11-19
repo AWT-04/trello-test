@@ -57,6 +57,6 @@ public class TeamCreationPage {
 
         createTeamButton.click();
         iLLWeDoThisLater.click();
-        return new BoardPage(webDriver);
+        return new BoardPage();
     }
 }

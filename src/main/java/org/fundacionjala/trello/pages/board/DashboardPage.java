@@ -81,37 +81,13 @@ public class DashboardPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public BoardPage createBoard(final String nameBoard) {
-        addButton.click();
-        addBoardButton.click();
-        addBoardTitle.sendKeys(nameBoard);
-        createBoard.click();
-        return new BoardPage(webDriver);
-    }
-
-    public BoardPage searchBoard(final String nameBoard) {
-        boardButton.click();
-        findBoard.sendKeys(nameBoard);
-        selectBoard.click();
-        return new BoardPage(webDriver);
-    }
-
-    public void deleteBoard(final String nameBoard) {
-        searchBoard(nameBoard);
-        moreOptions.click();
-        closeBoard.click();
-        closeButton.click();
-        deleteBoard.click();
-        closeButton.click();
-    }
-
     public BoardCreationPage clickAddBoard(final String wayCreateProject) {
         HashMap<String, ISteps> waysToCreateBoard = new HashMap<>();
         waysToCreateBoard.put(WAY_BOARDS_PAGE, this::createBoardByCentralButton);
         waysToCreateBoard.put(WAY_ADD_BUTTON, this::createBoardByAddButton);
         waysToCreateBoard.put(WAY_BOARD_BUTTON, this::createBoardByBoardButton);
         waysToCreateBoard.get(wayCreateProject).execute();
-        return new BoardCreationPage(webDriver);
+        return new BoardCreationPage();
     }
 
     public void createBoardByCentralButton() {

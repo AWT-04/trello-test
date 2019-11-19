@@ -39,6 +39,8 @@ public class LoginPage {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("headless");
+
+        webDriver = new ChromeDriver(chromeOptions);
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(IMPLICIT_TIME, TimeUnit.SECONDS);
         webDriver.get("https://trello.com/login");

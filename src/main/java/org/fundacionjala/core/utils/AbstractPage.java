@@ -10,7 +10,7 @@ public abstract class AbstractPage {
     protected WebDriverWait webDriverWait;
     protected WebDriverAction webDriverAction;
 
-    public AbstractPage() {
+    protected AbstractPage() {
         this.webDriver = DriverManager.getInstance().getDriver();
         this.webDriverWait = DriverManager.getInstance().getWait();
         this.webDriverAction = new WebDriverAction(webDriver, webDriverWait);
