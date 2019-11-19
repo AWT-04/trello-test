@@ -8,11 +8,19 @@
         "username": "",
         "password": ""
       }
-    },
-    "url": {
-      "trello": ""
-    }
-    "local": {
-      "browser": ""
-    }
+  },
+  "url": {
+    "trello": ""
+  }
+  "local": {
+    "browser": ""
+  },
+  "browserstack": {
+     "user": "",
+     "key": "",
+     "os": "OS X",
+     "os_version": "11",
+     "browser": "Chrome",
+     "browser_version": "78.0.3904.84"
+  }
 }
