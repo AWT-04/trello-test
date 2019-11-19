@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Hooks {
-    RequestManager requestManager;
     public static String name = "AWT-" + LocalTime.now().toString();
     String boardId;
 
@@ -32,6 +31,5 @@ public class Hooks {
         RequestManager.delete(Authentication.getRequestSpecification("owner"),  String.format("https://api.trello.com/1/boards/%s", boardId));
         System.out.println("Board deleted sucessfully...");
         DriverManager.getInstance().getDriver().close();
-
     }
 }
