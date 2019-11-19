@@ -65,6 +65,8 @@ public class DashboardPage {
     }
 
 
+
+
     public BoardCreationPage clickAddBoard(final String wayCreateProject) {
         HashMap<String, ISteps> waysToCreateBoard = new HashMap<>();
         waysToCreateBoard.put(WAY_BOARDS_PAGE, this::createBoardByCentralButton);
