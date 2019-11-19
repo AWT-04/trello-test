@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 public class BoardPage extends AbstractPage {
@@ -239,7 +238,7 @@ public class BoardPage extends AbstractPage {
         btnSaveComment.click();
     }
 
-    public void closeDataForm(){
+    public void closeDataForm() {
         btnCloseCardForm.click();
     }
 
@@ -251,9 +250,9 @@ public class BoardPage extends AbstractPage {
         confirmDeleteBoard.click();
     }
 
-    public void selectCreatedBoard(final String name){
+    public void selectCreatedBoard(final String name) {
         WebElement nameListSelected = webDriver.findElement(By.xpath(String.format(
-                "//div[@class='board-tile-details-name']//div[contains(text(),'%s')]",name)));
+                "//div[@class='board-tile-details-name']//div[contains(text(),'%s')]", name)));
         nameListSelected.click();
     }
 }

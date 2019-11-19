@@ -14,7 +14,7 @@ public class CardSteps {
     private BoardPage boardPage;
     private ScenarioContext context;
 
-    public CardSteps(final BoardPage boardPage, ScenarioContext context) {
+    public CardSteps(final BoardPage boardPage, final ScenarioContext context) {
         this.boardPage = boardPage;
         this.context = context;
     }

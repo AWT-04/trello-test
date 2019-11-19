@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HooksCards {
-    public static String name = "AWT-" + LocalTime.now().toString();
+    private static String name = "AWT-" + LocalTime.now().toString();
     private ScenarioContext context;
 
     public HooksCards(final ScenarioContext context) {
@@ -21,18 +21,18 @@ public class HooksCards {
     }
 
     @Before ("@createBoard")
-    public void createBoard(){
+    public void createBoard() {
         ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
         Map<String, String> body = new HashMap<String, String>();
         body.put("name", name);
-        Response response = RequestManager.Trellopost(Authentication.getRequestSpecification("owner"),
+        Response response = RequestManager.trellopost(Authentication.getRequestSpecification("owner"),
                 "https://api.trello.com/1/boards", body);
         context.setContext("board", response);
         System.out.println("Board created succesfully..." + body);
     }
 
     @After ("@deleteBoard")
-    public void deleteBoard(){
+    public void deleteBoard() {
         RequestManager.delete(Authentication.getRequestSpecification("owner"),
                 String.format("https://api.trello.com/1/boards/%s",
                         context.getContext("board").jsonPath().getString("id")));

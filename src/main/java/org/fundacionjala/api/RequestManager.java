@@ -3,12 +3,10 @@ package org.fundacionjala.api;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
 import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 
-public class RequestManager {
+public final class RequestManager {
     private RequestManager() { }
     /**
      * Sets get method path.
@@ -59,8 +57,8 @@ public class RequestManager {
         return response;
     }
 
-    public static Response Trellopost(final RequestSpecification requestSpec, final String path,
-                                final Map<String, String> json) {
+    public static Response trellopost(final RequestSpecification requestSpec, final String path,
+                                      final Map<String, String> json) {
         Response response = given()
                 .spec(requestSpec)
                 .contentType(ContentType.JSON)
