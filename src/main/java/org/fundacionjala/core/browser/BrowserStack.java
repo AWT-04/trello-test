@@ -2,7 +2,6 @@ package org.fundacionjala.core.browser;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-
 public class BrowserStack extends RemoteConnection implements Browser {
     private static final String URL = String.format("http://%s:%s@hub-cloud.browserstack.com/wd/hub",
             ENVIRONMENT.getValue("$['browserstack']['user']"),
