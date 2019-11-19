@@ -5,18 +5,16 @@ import cucumber.api.java.Before;
 import io.restassured.response.Response;
 import org.fundacionjala.api.Authentication;
 import org.fundacionjala.api.RequestManager;
+import org.fundacionjala.core.driver.DriverManager;
 import org.fundacionjala.core.utils.ConfigVariableHandler;
-
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Hooks {
     RequestManager requestManager;
-    String name = "AWT-" + LocalTime.now().toString();
+    public static String name = "AWT-" + LocalTime.now().toString();
     String boardId;
-    public static String URLBOARD = "";
 
     @Before ("@createBoard")
     public void createBoard(){
@@ -26,7 +24,6 @@ public class Hooks {
         Response response = RequestManager.Trellopost(Authentication.getRequestSpecification("owner"),
                 "https://api.trello.com/1/boards", body);
         boardId = response.jsonPath().getString("id");
-        URLBOARD = response.jsonPath().getString("shortUrl");
         System.out.println("Board created succesfully..." + body);
     }
 
@@ -34,5 +31,7 @@ public class Hooks {
     public void deleteBoard(){
         RequestManager.delete(Authentication.getRequestSpecification("owner"),  String.format("https://api.trello.com/1/boards/%s", boardId));
         System.out.println("Board deleted sucessfully...");
+        DriverManager.getInstance().getDriver().close();
+
     }
 }

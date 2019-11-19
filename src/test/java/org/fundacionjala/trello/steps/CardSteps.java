@@ -1,8 +1,10 @@
 package org.fundacionjala.trello.steps;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.fundacionjala.core.driver.DriverManager;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.testng.Assert;
 
@@ -113,6 +115,6 @@ public class CardSteps {
 
     @Given("I navigate to created board")
     public void iNavigateToCreatedBoard() {
-        boardPage.webDriver.get(Hooks.URLBOARD);
+        boardPage.selectCreatedBoard(Hooks.name);
     }
 }

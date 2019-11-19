@@ -130,6 +130,7 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".js-confirm")
     private WebElement confirmDeleteBoard;
 
+
     public void createList(final String nameList) {
         webDriverAction.waitVisibility(txtNameList);
         txtNameList.sendKeys(nameList);
@@ -287,5 +288,11 @@ public class BoardPage extends AbstractPage {
         closeButton.click();
         deleteBoard.click();
         confirmDeleteBoard.click();
+    }
+
+    public void selectCreatedBoard(final String name){
+        WebElement nameListSelected = webDriver.findElement(By.xpath(String.format(
+                "//div[@class='board-tile-details-name']//div[contains(text(),'%s')]",name)));
+        nameListSelected.click();
     }
 }
