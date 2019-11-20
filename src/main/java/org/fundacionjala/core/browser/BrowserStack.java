@@ -6,9 +6,9 @@ public class BrowserStack extends RemoteConnection implements Browser {
     private static final String URL = String.format("http://%s:%s@hub-cloud.browserstack.com/wd/hub",
             ENVIRONMENT.getValue("$['browserstack']['user']"),
             ENVIRONMENT.getValue("$['browserstack']['key']"));
-    private static final String BROWSER = "browser";
-    private static final String BROWSER_VERSION = "browser_version";
-    private static final String OS = "os";
+    private static final String BROWSERNAME = "browser";
+    private static final String DEVICE = "browser_version";
+    private static final String REALMOBILE = "os";
     private static final String OS_VERSION = "os_version";
 
     public BrowserStack() {
@@ -18,10 +18,10 @@ public class BrowserStack extends RemoteConnection implements Browser {
     @Override
     public DesiredCapabilities setCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(OS, ENVIRONMENT.getValue("$['browserstack']['os']"));
+        capabilities.setCapability(BROWSERNAME, ENVIRONMENT.getValue("$['browserstack']['browserName']"));
+        capabilities.setCapability(DEVICE, ENVIRONMENT.getValue("$['browserstack']['device']"));
+        capabilities.setCapability(REALMOBILE, ENVIRONMENT.getValue("$['browserstack']['realMobile']"));
         capabilities.setCapability(OS_VERSION, ENVIRONMENT.getValue("$['browserstack']['os_version']"));
-        capabilities.setCapability(BROWSER, ENVIRONMENT.getValue("$['browserstack']['browser']"));
-        capabilities.setCapability(BROWSER_VERSION, ENVIRONMENT.getValue("$['browserstack']['browser_version']"));
         return capabilities;
     }
 }
