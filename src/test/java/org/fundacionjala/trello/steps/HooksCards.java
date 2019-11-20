@@ -33,6 +33,5 @@ public class HooksCards {
         RequestManager.delete(Authentication.getRequestSpecification("owner"),
                 String.format("https://api.trello.com/1/boards/%s",
                         context.getContext("board").jsonPath().getString("id")));
-        DriverManager.getInstance().getDriver().close();
     }
 }

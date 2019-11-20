@@ -132,6 +132,12 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".js-confirm")
     private WebElement confirmDeleteBoard;
 
+    @FindBy(xpath = "//a[@class='board-header-btn mod-show-menu js-show-sidebar']")
+    private WebElement btnOpenMenu;
+
+    @FindBy(xpath = "//a[@class='board-menu-header-close-button icon-lg icon-close js-hide-sidebar']")
+    private WebElement btnCloseMenu;
+
     public void createList(final String nameList) {
         webDriverAction.click(btnAddTextList);
         webDriverAction.waitVisibility(txtNameList);
