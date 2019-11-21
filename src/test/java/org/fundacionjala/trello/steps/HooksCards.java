@@ -3,9 +3,9 @@ package org.fundacionjala.trello.steps;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.restassured.response.Response;
-import org.fundacionjala.api.Authentication;
-import org.fundacionjala.api.RequestManager;
-import org.fundacionjala.api.ScenarioContext;
+import org.fundacionjala.trello.api.Authentication;
+import org.fundacionjala.core.api.RequestManager;
+import org.fundacionjala.core.api.ScenarioContext;
 import org.fundacionjala.core.utils.Environment;
 
 import java.time.LocalTime;
