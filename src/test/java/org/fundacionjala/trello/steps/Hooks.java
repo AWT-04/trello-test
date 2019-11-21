@@ -64,14 +64,14 @@ public class Hooks {
     @After("@cleanBoardsAfter")
     public void iSendDeleteAllBoardsByPrefixAfter() {
         ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
-        final String prefix = " ";
+        final String prefix = "Fernando";
         Response response = RequestManager.get(Authentication.getRequestSpecification("owner"),
                 "/members/me/boards?filter=open)&key=" + configVariableHandler.getKeyToken("owner")
                         .get("keyToken") + "&token=" + configVariableHandler.getApiToken("owner").get("apiToken"));
         List<String> allName = response.jsonPath().getList("name");
         List<Integer> allID = response.jsonPath().getList("id");
         for (int i = 0; i < allName.size(); i++) {
-            if (allName.get(i).contains(prefix.toLowerCase())) {
+            if (allName.get(i).contains(prefix)) {
                 RequestManager.delete(Authentication.getRequestSpecification("owner"),
                         "/boards/" + allID.get(i));
             }

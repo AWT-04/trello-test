@@ -44,7 +44,7 @@ public class Dashboard extends AbstractPage {
     @FindBy(css = "button[data-test-id='header-create-team-button']")
     private WebElement createTeamButtonHeader;
 
-    @FindBy(css = "button[data-test-id='home-navigation-create-team-button']")
+    @FindBy(css = "button[data-test-id='home-navigation-create-team-button'] span span")
     private WebElement createTeamButtonSidebar;
 
 

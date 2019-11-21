@@ -17,7 +17,6 @@ Feature: Create new board in Trello
       | Title      | Fernando05 |
       | Background | green      |
       | Privacy    | private    |
-
     Then I should see the board
 
   @cleanBoardsAfter
@@ -26,5 +25,4 @@ Feature: Create new board in Trello
       | Title      | Fernando01 |
       | Background | green      |
       | Privacy    | private    |
-
     Then I should see the board
