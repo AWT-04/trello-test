@@ -191,9 +191,9 @@ public class BoardPage extends AbstractPage {
         String node = String.format("//span[contains(text(),'%s')]", nameCard);
         WebElement btnSelect = webDriver.findElement(By.xpath(node));
         if (!Environment.getInstance().getDevice().contains("chrome")) {
-            btnCloseMenu.click();
+            webDriverAction.click(btnCloseMenu);
         }
-        btnSelect.click();
+        webDriverAction.click(btnSelect);
     }
 
     public boolean verifySelectedCardNameInTheTitle(final String nameCard) {
