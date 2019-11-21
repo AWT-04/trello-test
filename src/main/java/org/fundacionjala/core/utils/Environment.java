@@ -83,7 +83,7 @@ public final class Environment {
         return line.substring(0, index);
     }
 
-    public String getDevice(){
+    public String getDevice() {
         return Environment.getInstance().getValue("local.browser");
     }
 }

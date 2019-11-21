@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import org.fundacionjala.api.Authentication;
 import org.fundacionjala.api.RequestManager;
 import org.fundacionjala.api.ScenarioContext;
-import org.fundacionjala.core.driver.DriverManager;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;

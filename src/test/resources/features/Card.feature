@@ -12,7 +12,6 @@ Feature: Card feature
     Then I should see "Selenium tasks" in the list of cards
     And I should see "Selenium tasks" in the menu of activity
     And I select the card "Selenium tasks"
-#    And I should see "Selenium tasks" in the title after selecting card
     And I should see "Selenium tasks" in the page title
 
   @createBoard @deleteBoard
