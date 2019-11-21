@@ -15,12 +15,12 @@ Feature: List feature
     And I select the card "Selenium tasks"
     And I should see "To Do" in list after selecting card
 
-  @createBoard @deleteBoard
-  Scenario: Verify archive a list in a board
-    When I add a list with the name:
-      | Name | To Do |
-    And I archive the list:
-      | Name | To Do |
-    Then I don't should see the list:
-      | Name | To Do |
-    And I delete the board created
+#  @createBoard @deleteBoard
+#  Scenario: Verify archive a list in a board
+#    When I add a list with the name:
+#      | Name | To Do |
+#    And I archive the list:
+#      | Name | To Do |
+#    Then I don't should see the list:
+#      | Name | To Do |
+#    And I delete the board created
