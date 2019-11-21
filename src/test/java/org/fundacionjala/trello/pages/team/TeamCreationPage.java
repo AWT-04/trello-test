@@ -1,6 +1,6 @@
 package org.fundacionjala.trello.pages.team;
 
-import org.fundacionjala.trello.pages.common.ISteps;
+import org.fundacionjala.core.ui.ISteps;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
