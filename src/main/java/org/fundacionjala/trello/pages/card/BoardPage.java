@@ -213,14 +213,11 @@ public class BoardPage extends AbstractPage {
     }
 
     public boolean verifyCardNameInTheMenuActivity(final String nameCard) {
-        System.out.println("navigator = " + Environment.getInstance().getDevice());
         if (!Environment.getInstance().getDevice().contains("chrome")) {
             btnOpenMenu.click();
         }
         WebElement node = webDriver.findElement(By.xpath(String.format(
                 "//a[@class = 'action-card' and contains(text(),'%s')]", nameCard)));
-        System.out.println("node name = " + node.getText());
-        System.out.println("name = " + nameCard);
         return node.getText().contains(nameCard);
     }
 

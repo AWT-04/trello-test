@@ -6,6 +6,8 @@ import io.restassured.response.Response;
 import org.fundacionjala.api.Authentication;
 import org.fundacionjala.api.RequestManager;
 import org.fundacionjala.api.ScenarioContext;
+import org.fundacionjala.core.utils.Environment;
+
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,14 +25,14 @@ public class HooksCards {
         Map<String, String> body = new HashMap<String, String>();
         body.put("name", name);
         Response response = RequestManager.trellopost(Authentication.getRequestSpecification("owner"),
-                "https://api.trello.com/1/boards", body);
+                Environment.getInstance().getValue("url.trelloApiUri") + "boards", body);
         context.setContext("board", response);
     }
 
     @After ("@deleteBoard")
     public void deleteBoard() {
         RequestManager.delete(Authentication.getRequestSpecification("owner"),
-                String.format("https://api.trello.com/1/boards/%s",
+                String.format(Environment.getInstance().getValue("url.trelloApiUri") + "boards/%s",
                         context.getContext("board").jsonPath().getString("id")));
     }
 }
