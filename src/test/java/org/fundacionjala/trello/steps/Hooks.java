@@ -60,7 +60,6 @@ public class Hooks {
 
     @After("@cleanBoardsAfter")
     public void iSendDeleteAllBoardsByPrefixAfter() {
-        ConfigVariableHandler configVariableHandler = new ConfigVariableHandler();
         final String prefix = "Fernando";
         Response response = RequestManager.get(Authentication.getRequestSpecification(access),
                 "/members/me/boards?filter=open)");
