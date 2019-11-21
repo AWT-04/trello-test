@@ -1,26 +1,38 @@
 {
   "credentials": {
-      "owner": {
-        "username": "",
-        "password": ""
-      },
-      "member": {
-        "username": "",
-        "password": ""
-      }
+    "owner": {
+      "username": "",
+      "password": "",
+      "apiToken": "",
+      "keyToken": ""
+    },
+    "member": {
+      "username": "",
+      "password": "",
+      "apiToken": "",
+      "keyToken": ""
+    }
   },
   "url": {
-    "trello": ""
-  }
+    "trello": "https://trello.com/login",
+    "trelloApiUri": "https://api.trello.com/1/"
+  },
   "local": {
-    "browser": ""
+    "browser": "chrome_headless"
   },
   "browserstack": {
-     "user": "",
-     "key": "",
-     "os": "OS X",
-     "os_version": "11",
-     "browser": "Chrome",
-     "browser_version": "78.0.3904.84"
+    "user": "",
+    "key": "",
+    "browserName": "iPhone",
+    "device": "iPhone 8 Plus",
+    "realMobile": "false",
+    "os_version": "11"
+  },
+  "saucelabs": {
+    "user": "",
+    "key": "",
+    "browserName": "safari",
+    "platform": "macOS 10.14",
+    "version": "12.0"
   }
 }
