@@ -111,6 +111,7 @@ public class Dashboard extends AbstractPage {
     }
 
     public void createTeamFromSidebar() {
+        webDriverAction.waitVisibility(createTeamButtonSidebar);
         createTeamButtonSidebar.click();
     }
 
@@ -127,6 +128,7 @@ public class Dashboard extends AbstractPage {
         String node = String.format("//span[@data-test-id='home-team-tab-name' "
                 + "and contains(text(),'%s')]", teamNameToVerify);
         WebElement teamTitleInSidebar =  webDriver.findElement(By.xpath(node));
+        webDriverAction.waitVisibility(teamTitleInSidebar);
         return teamTitleInSidebar.getText();
     }
 
