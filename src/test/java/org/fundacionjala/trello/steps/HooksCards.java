@@ -20,7 +20,7 @@ public class HooksCards {
         this.context = context;
     }
 
-    @Before ("@createBoard")
+    @Before("@createBoard")
     public void createBoard() {
         Map<String, String> body = new HashMap<String, String>();
         body.put("name", name);
@@ -29,7 +29,7 @@ public class HooksCards {
         context.setContext("board", response);
     }
 
-    @After ("@deleteBoard")
+    @After("@deleteBoard")
     public void deleteBoard() {
         RequestManager.delete(Authentication.getRequestSpecification("owner"),
                 String.format(Environment.getInstance().getValue("url.trelloApiUri") + "boards/%s",

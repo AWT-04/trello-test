@@ -17,5 +17,12 @@ Feature: Create new board in Trello
       | Title      | Fernando05 |
       | Background | green      |
       | Privacy    | private    |
+    Then I should see the board
 
+  @cleanBoardsAfter
+  Scenario: Create new board with boards page
+    When I create new board from "boards page" with a:
+      | Title      | Fernando01 |
+      | Background | green      |
+      | Privacy    | private    |
     Then I should see the board
