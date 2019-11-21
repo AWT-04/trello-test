@@ -5,7 +5,6 @@ import cucumber.api.java.Before;
 import io.restassured.response.Response;
 import org.fundacionjala.api.Authentication;
 import org.fundacionjala.api.RequestManager;
-import org.fundacionjala.core.utils.ConfigVariableHandler;
 
 import java.util.List;
 

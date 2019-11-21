@@ -3,7 +3,7 @@ Feature: Team feature
 
   Background:
     Given I log in with the user "owner"
-
+#
 #  @cleanTeams
 #  Scenario: Create new team from sidebar
 #    When I create a new "Team from sidebar" with :
