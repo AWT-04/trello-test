@@ -243,6 +243,7 @@ public class BoardPage extends AbstractPage {
         btnAreaCardName.click();
         txtAreaCardName.clear();
         txtAreaCardName.sendKeys(newCardName);
+        btnDescription.click();
         txtDescription.click();
         txtDescription.sendKeys(description);
         btnSaveDescription.click();
