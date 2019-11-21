@@ -6,47 +6,49 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.Select;
-
 import java.util.List;
 
 public class BoardPage extends AbstractPage {
+
     private String xpathCard = "//*[@class='list-card-title js-card-name' and contains(text(),'%s')]";
 
-    @FindBy(how = How.CSS, using = ".list-name-input")
+    @FindBy(css = ".list-name-input")
     private WebElement txtNameList;
 
-    @FindBy(how = How.CSS, using = ".mod-list-add-button.js-save-edit")
+    @FindBy(xpath = "//span[@class='placeholder']")
+    private WebElement btnAddTextList;
+
+    @FindBy(css = ".mod-list-add-button.js-save-edit")
     private WebElement btnAddList;
 
-    @FindBy(how = How.CSS, using = ".open-card-composer.card-templates-enabled.js-open-card-composer")
+    @FindBy(css = ".open-card-composer.card-templates-enabled.js-open-card-composer")
     private WebElement btnAddCard;
 
-    @FindBy(how = How.CSS, using = ".js-cancel-edit")
+    @FindBy(css = ".js-cancel-edit")
     private WebElement btnExitCard;
 
-    @FindBy(how = How.CSS, using = ".list-card-composer-textarea.js-card-title")
+    @FindBy(css = ".list-card-composer-textarea.js-card-title")
     private WebElement txtNameCard;
 
-    @FindBy(how = How.CSS, using = ".js-add-card")
+    @FindBy(css = ".js-add-card")
     private WebElement btnAcceptAddCard;
 
-    @FindBy(how = How.CSS, using = ".js-cancel")
+    @FindBy(css = ".js-cancel")
     private WebElement btnCancelAddCard;
 
-    @FindBy(how = How.CSS, using = ".button-link.js-archive-card")
+    @FindBy(css = ".button-link.js-archive-card")
     private WebElement btnArchiveCard;
 
-    @FindBy(how = How.CSS, using = ".button-link.js-delete-card.negate")
+    @FindBy(css = ".button-link.js-delete-card.negate")
     private WebElement btnDeleteCard;
 
-    @FindBy(how = How.CSS, using = ".js-confirm.full.negate")
+    @FindBy(css = ".js-confirm.full.negate")
     private WebElement btnConfirmDeleteCard;
 
-    @FindBy(how = How.CSS, using = ".list-card.js-member-droppable.ui-droppable")
+    @FindBy(css = ".list-card.js-member-droppable.ui-droppable")
     private WebElement btnEdit;
 
-    @FindBy(how = How.CSS, using = ".primary.wide.js-save-edits")
+    @FindBy(css = ".primary.wide.js-save-edits")
     private WebElement btnSave;
 
     @FindBy(how = How.XPATH, using = "//textarea[@class='list-card-edit-title js-edit-card-title']")
@@ -61,10 +63,10 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".js-add-a-card")
     private WebElement buttonAddCard;
 
-    @FindBy(xpath = "//*[@class=\"list-header js-list-header u-clearfix is-menu-shown is-subscribe-shown\"]")
+    @FindBy(xpath = "//*[@class='list-header js-list-header u-clearfix is-menu-shown is-subscribe-shown']")
     private WebElement headerList;
 
-    @FindBy(xpath = "//*[@id=\"board\"]")
+    @FindBy(xpath = "//*[@id='board']")
     private WebElement lists;
 
     @FindBy(css = ".js-editing-target")
@@ -88,11 +90,54 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".js-close-list")
     private WebElement archiveListButton;
 
+    @FindBy(xpath = "//textarea[@class='mod-card-back-title js-card-detail-title-input is-editing']")
+    private WebElement txtAreaCardName;
+
+    @FindBy(xpath = "//a[@class='description-fake-text-area hide-on-edit js-edit-desc js-hide-with-draft']")
+    private WebElement btnDescription;
+
+    @FindBy(xpath = "//textarea[@class='field field-autosave js-description-draft description card-description']")
+    private WebElement txtDescription;
+
+    @FindBy(xpath = "//textarea[@class='comment-box-input js-new-comment-input']")
+    private WebElement btnComment;
+
+    @FindBy(xpath = "//textarea[@class='comment-box-input js-new-comment-input']")
+    private WebElement txtComment;
+
+    @FindBy(xpath = "//textarea[@class='mod-card-back-title js-card-detail-title-input']")
+    private WebElement btnAreaCardName;
+
+    @FindBy(xpath = "//input[@class='primary confirm mod-no-top-bottom-margin js-add-comment']")
+    private WebElement btnSaveComment;
+
+    @FindBy(xpath = "//input[@class='primary confirm mod-submit-edit js-save-edit']")
+    private WebElement btnSaveDescription;
+
+    @FindBy(xpath = "//a[@class='icon-md icon-close dialog-close-button js-close-window']")
+    private WebElement btnCloseCardForm;
+
+    @FindBy(css = ".js-open-more")
+    private WebElement moreOptions;
+
+    @FindBy(css = ".js-close-board")
+    private WebElement closeBoard;
+
+    @FindBy(css = ".negate")
+    private WebElement closeButton;
+
+    @FindBy(css = ".js-delete")
+    private WebElement deleteBoard;
+
+    @FindBy(css = ".js-confirm")
+    private WebElement confirmDeleteBoard;
+
     public void createList(final String nameList) {
+        webDriverAction.click(btnAddTextList);
         webDriverAction.waitVisibility(txtNameList);
-        txtNameList.sendKeys(nameList);
-        btnAddList.click();
-        btnExitCard.click();
+        webDriverAction.setValue(txtNameList, nameList);
+        webDriverAction.click(btnAddList);
+        webDriverAction.click(btnExitCard);
     }
 
     public void createCard(final String nameCard) {
@@ -163,47 +208,10 @@ public class BoardPage extends AbstractPage {
         return node.getText().contains(nameCard);
     }
 
-    public void editList(final String name) {
-        listEdit.click();
-        listEditText.clear();
-        listEditText.sendKeys(name);
-        buttonAddList.click();
-    }
-
-    public void addList(final String name) {
-        listName.sendKeys(name);
-        buttonAddList.click();
-    }
-
-    public void addSeveralList(final List<String> lists) {
-        for (String list : lists) {
-            addList(list);
-        }
-    }
-
     public String getTitleList(final String listName) {
         String listXpath = String.format("//*[text()='%s' and contains(@class,'js-list-name-input')]", listName);
         By listSelectorName = By.xpath(listXpath);
         return headerList.findElement(listSelectorName).getText();
-    }
-
-    public int getSizeList() {
-        return lists.findElements(By.cssSelector("div.js-list.list-wrapper")).size();
-    }
-
-    public void changeListToBoard(final String board) {
-        menuList.click();
-        moveList.click();
-        By selectBoard = By.cssSelector("select.js-select-board");
-        Select dropdown = new Select(webDriver.findElement(selectBoard));
-        dropdown.selectByVisibleText(board);
-        WebElement moveButton = webDriver.findElement(By.xpath("//*[@class='primary wide js-commit-position']"));
-        moveButton.click();
-    }
-
-    public void openBoardDrawer(final String boardName) {
-        searchDrawer.sendKeys(boardName);
-        firstFoundFile.click();
     }
 
     public void openMenuList(final String nameList) {
@@ -216,10 +224,35 @@ public class BoardPage extends AbstractPage {
         archiveListButton.click();
     }
 
-    public boolean verifyListExist(final String nameList) {
-        By element = By.xpath(String.format("//textarea[@aria-label='%s']", nameList));
-        return webDriverAction.isExistingSelector(element);
+    public void updteDataFromForm(final String nameCard, final String newCardName,
+                                  final String description, final String comment) {
+        selectCard(nameCard);
+        btnAreaCardName.click();
+        txtAreaCardName.clear();
+        txtAreaCardName.sendKeys(newCardName);
+        txtDescription.click();
+        txtDescription.sendKeys(description);
+        btnSaveDescription.click();
+        txtComment.click();
+        txtComment.sendKeys(comment);
+        btnSaveComment.click();
     }
 
+    public void closeDataForm() {
+        btnCloseCardForm.click();
+    }
 
+    public void deleteCurrentBoard() {
+        moreOptions.click();
+        closeBoard.click();
+        closeButton.click();
+        deleteBoard.click();
+        confirmDeleteBoard.click();
+    }
+
+    public void selectCreatedBoard(final String name) {
+        WebElement nameListSelected = webDriver.findElement(By.xpath(String.format(
+                "//div[@class='board-tile-details-name']//div[contains(text(),'%s')]", name)));
+        nameListSelected.click();
+    }
 }
