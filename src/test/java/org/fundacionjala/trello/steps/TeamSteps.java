@@ -7,15 +7,12 @@ import org.fundacionjala.trello.pages.board.Dashboard;
 import org.fundacionjala.trello.pages.team.TeamCreationPage;
 import org.fundacionjala.trello.pages.team.TeamFields;
 import org.fundacionjala.trello.pages.team.TeamPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import java.util.Map;
 
 public class TeamSteps {
     private Dashboard dashboard;
-    private WebDriver webDriver;
-    private TeamCreationPage teamCreationPage;
     private TeamPage teamPage;
 
     public TeamSteps(final Dashboard dashboardPage) {
@@ -25,6 +22,7 @@ public class TeamSteps {
     @When("I create a new {string} with :")
     public void iCreateANewTeamFromHeaderWith(final String wayToCreateTeam,
                                               final Map<TeamFields, String> dataTable) {
+        TeamCreationPage teamCreationPage;
         teamCreationPage = dashboard.teamClickAddHeader(wayToCreateTeam);
         teamCreationPage.createNewTeam(dataTable);
     }

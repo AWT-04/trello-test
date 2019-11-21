@@ -10,10 +10,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class TeamCreationPage {
-    private WebDriver webDriver;
-    private String nameTeam;
-    private String descriptionTeam;
-
+    
     //team
     @FindBy(css = "input[data-test-id='header-create-team-name-input']")
     private WebElement nameTeamInputField;
@@ -40,14 +37,13 @@ public class TeamCreationPage {
     private WebElement iLLWeDoThisLater;
 
     public TeamCreationPage(final WebDriver webDriver) {
-        this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
     public BoardPage createNewTeam(final Map<TeamFields, String> inputData) {
         EnumMap<TeamFields, ISteps> enumTeamFields = new EnumMap<>(TeamFields.class);
-        nameTeam = inputData.get(TeamFields.NAME);
-        descriptionTeam = inputData.get(TeamFields.DESCRIPTION);
+        String nameTeam = inputData.get(TeamFields.NAME);
+        String descriptionTeam = inputData.get(TeamFields.DESCRIPTION);
         enumTeamFields.put(TeamFields.NAME, () -> nameTeamInputField.sendKeys(nameTeam));
         enumTeamFields.put(TeamFields.DESCRIPTION, () -> descriptionTeamInputField.sendKeys(descriptionTeam));
 
