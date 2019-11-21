@@ -1,6 +1,7 @@
 package org.fundacionjala.trello.pages.card;
 
 import org.fundacionjala.core.utils.AbstractPage;
+import org.fundacionjala.core.utils.Environment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -189,6 +190,9 @@ public class BoardPage extends AbstractPage {
     public void selectCard(final String nameCard) {
         String node = String.format("//span[contains(text(),'%s')]", nameCard);
         WebElement btnSelect = webDriver.findElement(By.xpath(node));
+        if (!Environment.getInstance().getDevice().contains("chrome")) {
+            btnCloseMenu.click();
+        }
         btnSelect.click();
     }
 
@@ -209,8 +213,14 @@ public class BoardPage extends AbstractPage {
     }
 
     public boolean verifyCardNameInTheMenuActivity(final String nameCard) {
+        System.out.println("navigator = " + Environment.getInstance().getDevice());
+        if (!Environment.getInstance().getDevice().contains("chrome")) {
+            btnOpenMenu.click();
+        }
         WebElement node = webDriver.findElement(By.xpath(String.format(
-                "//a[contains(text(),'%s')]", nameCard)));
+                "//a[@class = 'action-card' and contains(text(),'%s')]", nameCard)));
+        System.out.println("node name = " + node.getText());
+        System.out.println("name = " + nameCard);
         return node.getText().contains(nameCard);
     }
 

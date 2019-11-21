@@ -82,4 +82,8 @@ public final class Environment {
         final int index = line.indexOf(limit);
         return line.substring(0, index);
     }
+
+    public String getDevice(){
+        return Environment.getInstance().getValue("local.browser");
+    }
 }
