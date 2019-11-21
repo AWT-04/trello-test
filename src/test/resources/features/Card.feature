@@ -50,3 +50,4 @@ Feature: Card feature
     And I should see "New Selenium 3.0" in the page title
     And I close the card form
 #    And I should see "New Selenium 3.0" in the page title
+  
