@@ -1,6 +1,7 @@
 package org.fundacionjala.trello.pages.card;
 
 import org.fundacionjala.core.utils.AbstractPage;
+import org.fundacionjala.core.utils.Environment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -132,6 +133,12 @@ public class BoardPage extends AbstractPage {
     @FindBy(css = ".js-confirm")
     private WebElement confirmDeleteBoard;
 
+    @FindBy(xpath = "//a[@class='board-header-btn mod-show-menu js-show-sidebar']")
+    private WebElement btnOpenMenu;
+
+    @FindBy(xpath = "//a[@class='board-menu-header-close-button icon-lg icon-close js-hide-sidebar']")
+    private WebElement btnCloseMenu;
+
     public void createList(final String nameList) {
         webDriverAction.click(btnAddTextList);
         webDriverAction.waitVisibility(txtNameList);
@@ -183,6 +190,9 @@ public class BoardPage extends AbstractPage {
     public void selectCard(final String nameCard) {
         String node = String.format("//span[contains(text(),'%s')]", nameCard);
         WebElement btnSelect = webDriver.findElement(By.xpath(node));
+        if (!Environment.getInstance().getDevice().contains("chrome")) {
+            btnCloseMenu.click();
+        }
         btnSelect.click();
     }
 
@@ -203,8 +213,11 @@ public class BoardPage extends AbstractPage {
     }
 
     public boolean verifyCardNameInTheMenuActivity(final String nameCard) {
+        if (!Environment.getInstance().getDevice().contains("chrome")) {
+            btnOpenMenu.click();
+        }
         WebElement node = webDriver.findElement(By.xpath(String.format(
-                "//a[contains(text(),'%s')]", nameCard)));
+                "//a[@class = 'action-card' and contains(text(),'%s')]", nameCard)));
         return node.getText().contains(nameCard);
     }
 
