@@ -9,7 +9,6 @@ Feature: Create new board in Trello
       | Title      | Fernando |
       | Background | green    |
       | Privacy    | private  |
-
     Then I should see the board
 
   Scenario: Create new board with boards page
