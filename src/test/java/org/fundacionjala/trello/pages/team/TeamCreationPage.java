@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class TeamCreationPage {
 
-    //team
     @FindBy(css = "input[data-test-id='header-create-team-name-input']")
     private WebElement nameTeamInputField;
 
