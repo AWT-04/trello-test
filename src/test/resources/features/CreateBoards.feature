@@ -9,8 +9,7 @@ Feature: Create new board in Trello
       | Title      | Fernando |
       | Background | green    |
       | Privacy    | private  |
-
-    Then I should see the board
+#    Then I should see the board
 
   Scenario: Create new board with boards page
     When I create new board from "boards page" with a:

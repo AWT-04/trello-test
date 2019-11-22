@@ -4,7 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.api.ScenarioContext;
+import org.fundacionjala.core.api.ScenarioContext;
 import org.fundacionjala.trello.pages.card.BoardPage;
 import org.testng.Assert;
 
